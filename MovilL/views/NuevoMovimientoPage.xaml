@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:controls="clr-namespace:MovilL.Views.Controls"
+			 x:Class="MovilL.views.NuevoMovimientoPage"
+			 Title="Nuevo movimiento">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="👤" Clicked="OnUsuarioClicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid x:Name="MainGrid">
+
+        <!-- Contenido principal -->
+        <ScrollView HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="500">
+            <VerticalStackLayout Spacing="15">
+
+                <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center"/>
+                <Picker x:Name="PickerTipo" Title="Tipo" FontSize="16">
+                    <Picker.Items>
+                        <x:String>Ingreso</x:String>
+                        <x:String>Gasto</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Label Text="Categoría" FontAttributes="Bold"/>
+                <Entry x:Name="EntryCategoria" Placeholder="Ej: Comida, Sueldo, Transporte"/>
+
+                <Label Text="Monto" FontAttributes="Bold"/>
+                <Entry x:Name="EntryMonto" Placeholder="0.00$" Keyboard="Numeric"/>
+
+                <Label Text="Fecha" FontAttributes="Bold"/>
+                <DatePicker x:Name="DatePickerFecha"/>
+
+                <Button Text="Guardar movimiento"
+						Clicked="OnGuardarClicked"
+						BackgroundColor="#4CAF50"
+						TextColor="White"/>
+
+                <Label x:Name="LabelMensaje"
+					   TextColor="Green"
+					   IsVisible="False"
+					   HorizontalOptions="Center"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        
+        <controls:UsuarioPanelView x:Name="PanelUsuario"/>
+
+    </Grid>
+</ContentPage>

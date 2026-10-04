@@ -1,0 +1,34 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilL.views.LoginPage">
+
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+
+        <Label Text="Gestión Financiera Personal"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="20"/>
+
+        <Entry x:Name="EntryUsuario" Placeholder="Usuario"/>
+        <Entry x:Name="EntryContrasena" Placeholder="Contraseña" IsPassword="True"/>
+
+        <Label x:Name="LabelError"
+               TextColor="Red"
+               IsVisible="False"
+               Text="Usuario o contraseña incorrectos"/>
+
+        <Button Text="Iniciar sesión"
+                Clicked="OnIniciarSesionClicked"
+                BackgroundColor="#4CAF50"
+                TextColor="White"/>
+
+        <Button Text="Entrar como invitado"
+                Clicked="OnEntrarInvitadoClicked"
+                BackgroundColor="Transparent"
+                TextColor="#4CAF50"
+                BorderColor="#4CAF50"
+                BorderWidth="1"/>
+
+    </VerticalStackLayout>
+</ContentPage>

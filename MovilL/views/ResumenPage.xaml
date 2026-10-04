@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MovilL.Views.Controls"
+             x:Class="MovilL.views.ResumenPage"
+             Title="Resumen">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="👤" Clicked="OnUsuarioClicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid x:Name="MainGrid">
+
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="18">
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Grid.Column="0"
+                           Text="Tu resumen"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <Border Grid.Column="0"
+                            BackgroundColor="#1B3B2A"
+                            StrokeShape="RoundRectangle 14"
+                            Stroke="Transparent"
+                            Padding="16">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="↑ Ingresos" FontSize="13" TextColor="#81C784"/>
+                            <Label x:Name="LabelIngresos" Text="$0" FontSize="22" FontAttributes="Bold" TextColor="White"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            BackgroundColor="#3B1E1E"
+                            StrokeShape="RoundRectangle 14"
+                            Stroke="Transparent"
+                            Padding="16">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="↓ Gastos" FontSize="13" TextColor="#E57373"/>
+                            <Label x:Name="LabelGastos" Text="$0" FontSize="22" FontAttributes="Bold" TextColor="White"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Border BackgroundColor="#1E2A3B"
+                        StrokeShape="RoundRectangle 14"
+                        Stroke="Transparent"
+                        Padding="18">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Balance actual" FontSize="13" TextColor="#90CAF9"/>
+                        <Label x:Name="LabelBalance" Text="$0" FontSize="30" FontAttributes="Bold" TextColor="White"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="Movimientos"
+                       FontSize="17"
+                       FontAttributes="Bold"
+                       Margin="0,10,0,0"/>
+
+                <CollectionView x:Name="ListaMovimientos">
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout HorizontalOptions="Center" Padding="0,30" Spacing="6">
+                            <Label Text="📭" FontSize="32" HorizontalOptions="Center"/>
+                            <Label Text="Aún no hay movimientos registrados"
+                                   TextColor="#9E9E9E"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeShape="RoundRectangle 12"
+                                    Stroke="#2A2A3A"
+                                    BackgroundColor="#20202E"
+                                    Padding="14"
+                                    Margin="0,0,0,8">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <VerticalStackLayout Grid.Column="0">
+                                        <Label Text="{Binding Categoria}" FontAttributes="Bold" TextColor="White"/>
+                                        <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}"
+                                               FontSize="12" TextColor="#9E9E9E"/>
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Monto, StringFormat='{0:C}'}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           TextColor="{Binding Tipo, Converter={StaticResource TipoAColorConverter}}"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <controls:UsuarioPanelView x:Name="PanelUsuario"/>
+
+    </Grid>
+</ContentPage>

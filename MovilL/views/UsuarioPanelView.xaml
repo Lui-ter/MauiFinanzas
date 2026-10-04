@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilL.Views.Controls.UsuarioPanelView">
+
+    <Border x:Name="UsuarioPanel"
+            HorizontalOptions="End"
+            VerticalOptions="Fill"
+            WidthRequest="300"
+            BackgroundColor="#242424"
+            Stroke="#1A1A1A"
+            StrokeShape="Rectangle"
+            Padding="15"
+            Margin="0"
+            TranslationX="300"
+            ZIndex="10">
+        <ScrollView>
+            <VerticalStackLayout Spacing="20">
+
+                <Label Text="Mi Perfil"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+
+                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Border WidthRequest="90"
+                            HeightRequest="90"
+                            StrokeShape="RoundRectangle 45"
+                            Stroke="#4CAF50"
+                            BackgroundColor="#333333"
+                            Padding="0"
+                            HorizontalOptions="Center">
+                        <Image x:Name="ImgUsuario"
+                               Aspect="AspectFill"
+                               WidthRequest="90"
+                               HeightRequest="90"/>
+                    </Border>
+
+                    <Label x:Name="LblNombreUsuario"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <Button Text="Perfil"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        Clicked="OnPerfilClicked"/>
+
+                <Button Text="Configurar"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        Clicked="OnConfigurarClicked"/>
+
+                <Button Text="Cerrar sesión"
+                        BackgroundColor="#FF6B6B"
+                        TextColor="White"
+                        Clicked="OnCerrarSesionClicked"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Border>
+</ContentView>
