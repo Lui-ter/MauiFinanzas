@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MovilL.Models;
 
 public static class Sesion
@@ -11,6 +11,9 @@ public static class Sesion
     // Si es invitado, se llena y se pierde al cerrar la app.
     // Si es usuario, más adelante esto se puede cambiar por SQLite/Preferences.
     public static List<Movimiento> Movimientos { get; set; } = new();
+
+    // Lista de categorías en memoria
+    public static List<Categoria> Categorias { get; set; } = Categoria.ListaCategorias;
 
     public static void CerrarSesion()
     {

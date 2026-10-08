@@ -1,52 +1,179 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:controls="clr-namespace:MovilL.Views.Controls"
-			 x:Class="MovilL.views.NuevoMovimientoPage"
-			 Title="Nuevo movimiento">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MovilL.Views.Controls"
+             x:Class="MovilL.views.NuevoMovimientoPage"
+             Title="Nuevo movimiento">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="👤" Clicked="OnUsuarioClicked"/>
     </ContentPage.ToolbarItems>
 
-    <Grid x:Name="MainGrid">
+    <Grid x:Name="MainGrid" ColumnDefinitions="*,*">
 
-        <!-- Contenido principal -->
-        <ScrollView HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="500">
-            <VerticalStackLayout Spacing="15">
+        <!-- Lado izquierdo: Formulario de entrada -->
+        <ScrollView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="500">
+            <VerticalStackLayout Spacing="15" Padding="20" WidthRequest="390">
 
-                <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center"/>
-                <Picker x:Name="PickerTipo" Title="Tipo" FontSize="16">
-                    <Picker.Items>
-                        <x:String>Ingreso</x:String>
-                        <x:String>Gasto</x:String>
-                    </Picker.Items>
-                </Picker>
+                <Label Text="FORMULARIO"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       HorizontalOptions="Center"
+                       TextColor="White"/>
 
-                <Label Text="Categoría" FontAttributes="Bold"/>
-                <Entry x:Name="EntryCategoria" Placeholder="Ej: Comida, Sueldo, Transporte"/>
+                <Border StrokeShape="RoundRectangle 16" 
+                        BackgroundColor="#1A1D29" 
+                        Stroke="#333A4E" 
+                        StrokeThickness="2" 
+                        Padding="25">
+                    <VerticalStackLayout Spacing="15">
 
-                <Label Text="Monto" FontAttributes="Bold"/>
-                <Entry x:Name="EntryMonto" Placeholder="0.00$" Keyboard="Numeric"/>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="14" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 8" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="10,0">
+                                <Picker x:Name="PickerTipo" Title="" FontSize="15" TextColor="White" TitleColor="Gray" SelectedIndexChanged="OnTipoChanged">
+                                    <Picker.Items>
+                                        <x:String>Ingreso</x:String>
+                                        <x:String>Gasto</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </Border>
+                        </VerticalStackLayout>
 
-                <Label Text="Fecha" FontAttributes="Bold"/>
-                <DatePicker x:Name="DatePickerFecha"/>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Categoría" FontAttributes="Bold" FontSize="14" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 8" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="10,0">
+                                <Picker x:Name="PickerCategoria"
+                                        Title=""
+                                        ItemDisplayBinding="{Binding Nombre}"
+                                        FontSize="15"
+                                        TextColor="White"
+                                        TitleColor="Gray"
+                                        SelectedIndexChanged="OnFormularioChanged"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                <Button Text="Guardar movimiento"
-						Clicked="OnGuardarClicked"
-						BackgroundColor="#4CAF50"
-						TextColor="White"/>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Monto" FontAttributes="Bold" FontSize="14" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 8" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="10,2">
+                                <Entry x:Name="EntryMonto"
+                                       Placeholder="0.00$"
+                                       PlaceholderColor="Gray"
+                                       TextColor="White"
+                                       Keyboard="Numeric"
+                                       FontSize="15"
+                                       TextChanged="OnFormularioChanged"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                <Label x:Name="LabelMensaje"
-					   TextColor="Green"
-					   IsVisible="False"
-					   HorizontalOptions="Center"/>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Fecha" FontAttributes="Bold" FontSize="14" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 8" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="10,2">
+                                <DatePicker x:Name="DatePickerFecha"
+                                            TextColor="White"
+                                            FontSize="15"
+                                            DateSelected="OnFormularioChanged"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <Label x:Name="LabelMensaje"
+                               TextColor="#4CAF50"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               IsVisible="False"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"/>
+
+                    </VerticalStackLayout>
+                </Border>
 
             </VerticalStackLayout>
         </ScrollView>
 
-        
-        <controls:UsuarioPanelView x:Name="PanelUsuario"/>
+        <!-- Lado derecho: PREVIEW Y BOTÓN GUARDAR -->
+        <ScrollView Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="450">
+            <VerticalStackLayout Spacing="15" Padding="20" WidthRequest="380">
+
+                <Label Text="RESUMEN" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" TextColor="White"/>
+
+                <Border StrokeShape="RoundRectangle 16" 
+                        BackgroundColor="#1A1D29" 
+                        Stroke="#333A4E" 
+                        StrokeThickness="2" 
+                        Padding="25">
+                    <VerticalStackLayout Spacing="18" HorizontalOptions="Center">
+
+                        <!-- Tipo de movimiento -->
+                        <Label x:Name="LabelPreviewTipo" 
+                               Text="INGRESO" 
+                               FontAttributes="Bold" 
+                               FontSize="22" 
+                               HorizontalOptions="Center" 
+                               TextColor="#4CAF50"/>
+
+                        <!-- Cuadro con la Imagen ocupando todo el espacio del Border -->
+                        <Border x:Name="BorderIcono" 
+                                StrokeShape="RoundRectangle 16" 
+                                BackgroundColor="#25293A" 
+                                Stroke="#4CAF50"
+                                StrokeThickness="2" 
+                                HeightRequest="160" 
+                                WidthRequest="260" 
+                                HorizontalOptions="Center"
+                                Padding="0">
+                            <Grid>
+                                <!-- Imagen ocupando todo el espacio del Border -->
+                                <Image x:Name="ImagePreviewCategoria"
+                                       Aspect="AspectFill"
+                                       HorizontalOptions="Fill"
+                                       VerticalOptions="Fill"/>
+
+                                <!-- Barra inferior elegante con el nombre de la categoría -->
+                                <Border VerticalOptions="End"
+                                        BackgroundColor="#D9161824"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 0,0,14,14"
+                                        Padding="10,8">
+                                    <Label x:Name="LabelPreviewCategoria"
+                                           Text="Sin categoría"
+                                           FontSize="15"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           HorizontalOptions="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- Datos: Monto y Fecha -->
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Fill">
+                            <Grid ColumnDefinitions="Auto, *">
+                                <Label Text="monto:" FontAttributes="Bold" TextColor="Gray" FontSize="16"/>
+                                <Label x:Name="LabelPreviewMonto" Grid.Column="1" Text="$ 0,00" FontAttributes="Bold" FontSize="18" HorizontalOptions="End" TextColor="White"/>
+                            </Grid>
+
+                            <Grid ColumnDefinitions="Auto, *">
+                                <Label Text="fecha:" FontAttributes="Bold" TextColor="Gray" FontSize="16"/>
+                                <Label x:Name="LabelPreviewFecha" Grid.Column="1" Text="--/--/----" FontSize="15" HorizontalOptions="End" TextColor="White"/>
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <!-- Único botón de Guardar (Dinámico) -->
+                        <Button x:Name="BtnGuardar"
+                                Text="Guardar ingreso" 
+                                Clicked="OnGuardarClicked" 
+                                BackgroundColor="#4CAF50" 
+                                TextColor="White" 
+                                FontAttributes="Bold"
+                                CornerRadius="8"
+                                Margin="0,10,0,0"/>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <controls:UsuarioPanelView x:Name="PanelUsuario" Grid.ColumnSpan="2"/>
 
     </Grid>
 </ContentPage>

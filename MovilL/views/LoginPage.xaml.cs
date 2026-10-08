@@ -11,7 +11,7 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
     }
 
-    private async void OnIniciarSesionClicked(object sender, EventArgs e)
+    private async void OnIniciarSesionClicked(object? sender, EventArgs e)
     {
         if (EntryUsuario.Text == UsuarioValido && EntryContrasena.Text == ContrasenaValida)
         {
@@ -28,7 +28,7 @@ public partial class LoginPage : ContentPage
         }
     }
 
-    private async void OnEntrarInvitadoClicked(object sender, EventArgs e)
+    private async void OnEntrarInvitadoClicked(object? sender, EventArgs e)
     {
         Sesion.CerrarSesion();
         Sesion.EstaLogueado = true;

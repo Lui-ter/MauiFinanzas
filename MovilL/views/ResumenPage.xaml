@@ -12,54 +12,85 @@
     <Grid x:Name="MainGrid">
 
         <ScrollView>
-            <VerticalStackLayout Padding="20" Spacing="18">
+            <VerticalStackLayout Padding="20" Spacing="20">
 
-                <Grid ColumnDefinitions="*,Auto">
-                    <Label Grid.Column="0"
-                           Text="Tu resumen"
-                           FontSize="24"
-                           FontAttributes="Bold"
-                           VerticalOptions="Center"/>
-                </Grid>
+                <Label Text="Tu resumen"
+                       FontSize="24"
+                       FontAttributes="Bold"/>
 
-                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                    <Border Grid.Column="0"
-                            BackgroundColor="#1B3B2A"
-                            StrokeShape="RoundRectangle 14"
-                            Stroke="Transparent"
-                            Padding="16">
-                        <VerticalStackLayout Spacing="4">
-                            <Label Text="↑ Ingresos" FontSize="13" TextColor="#81C784"/>
-                            <Label x:Name="LabelIngresos" Text="$0" FontSize="22" FontAttributes="Bold" TextColor="White"/>
-                        </VerticalStackLayout>
-                    </Border>
+                <!-- PANEL SUPERIOR: 2 COLUMNAS (MÉTRICAS + GRÁFICA) -->
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
 
-                    <Border Grid.Column="1"
-                            BackgroundColor="#3B1E1E"
-                            StrokeShape="RoundRectangle 14"
-                            Stroke="Transparent"
-                            Padding="16">
-                        <VerticalStackLayout Spacing="4">
-                            <Label Text="↓ Gastos" FontSize="13" TextColor="#E57373"/>
-                            <Label x:Name="LabelGastos" Text="$0" FontSize="22" FontAttributes="Bold" TextColor="White"/>
-                        </VerticalStackLayout>
-                    </Border>
-                </Grid>
+                    <!-- Columna Izquierda: Tarjetas de Totales -->
+                    <VerticalStackLayout Grid.Column="0" Spacing="10">
 
-                <Border BackgroundColor="#1E2A3B"
-                        StrokeShape="RoundRectangle 14"
-                        Stroke="Transparent"
-                        Padding="18">
-                    <VerticalStackLayout Spacing="4">
-                        <Label Text="Balance actual" FontSize="13" TextColor="#90CAF9"/>
-                        <Label x:Name="LabelBalance" Text="$0" FontSize="30" FontAttributes="Bold" TextColor="White"/>
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                            <!-- Ingresos -->
+                            <Border Grid.Column="0"
+                                    BackgroundColor="#1B3B2A"
+                                    StrokeShape="RoundRectangle 12"
+                                    Stroke="Transparent"
+                                    Padding="14">
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="↑ Ingresos" FontSize="12" TextColor="#81C784"/>
+                                    <Label x:Name="LabelIngresos" Text="$0" FontSize="18" FontAttributes="Bold" TextColor="White"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <!-- Gastos -->
+                            <Border Grid.Column="1"
+                                    BackgroundColor="#3B1E1E"
+                                    StrokeShape="RoundRectangle 12"
+                                    Stroke="Transparent"
+                                    Padding="14">
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="↓ Gastos" FontSize="12" TextColor="#E57373"/>
+                                    <Label x:Name="LabelGastos" Text="$0" FontSize="18" FontAttributes="Bold" TextColor="White"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+
+                        <!-- Balance Actual -->
+                        <Border BackgroundColor="#1E2A3B"
+                                StrokeShape="RoundRectangle 12"
+                                Stroke="Transparent"
+                                Padding="16">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Balance actual" FontSize="12" TextColor="#90CAF9"/>
+                                <Label x:Name="LabelBalance" Text="$0" FontSize="26" FontAttributes="Bold" TextColor="White"/>
+                            </VerticalStackLayout>
+                        </Border>
+
                     </VerticalStackLayout>
-                </Border>
 
-                <Label Text="Movimientos"
-                       FontSize="17"
+                    <!-- Columna Derecha: Tarjeta de Gráfica -->
+                    <Border Grid.Column="1" 
+                            BackgroundColor="#1E202C" 
+                            StrokeShape="RoundRectangle 12" 
+                            Stroke="#2D3042" 
+                            Padding="15">
+                        <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="Distribución por categoría" 
+                                   FontSize="14" 
+                                   FontAttributes="Bold" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Center"/>
+
+                            <!-- Gráfica visual renderizada en MAUI -->
+                            <GraphicsView x:Name="GraficaDonaView" 
+                                          HeightRequest="110" 
+                                          WidthRequest="110" 
+                                          HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                </Grid>
+
+                <!-- LISTA DE MOVIMIENTOS RECIENTES -->
+                <Label Text="Movimientos recientes"
+                       FontSize="18"
                        FontAttributes="Bold"
-                       Margin="0,10,0,0"/>
+                       Margin="0,5,0,0"/>
 
                 <CollectionView x:Name="ListaMovimientos">
                     <CollectionView.EmptyView>
@@ -76,17 +107,36 @@
                             <Border StrokeShape="RoundRectangle 12"
                                     Stroke="#2A2A3A"
                                     BackgroundColor="#20202E"
-                                    Padding="14"
+                                    Padding="12,10"
                                     Margin="0,0,0,8">
-                                <Grid ColumnDefinitions="*,Auto">
-                                    <VerticalStackLayout Grid.Column="0">
-                                        <Label Text="{Binding Categoria}" FontAttributes="Bold" TextColor="White"/>
+                                <Grid ColumnDefinitions="Auto, *, Auto">
+
+                                    <!-- Icono dinámico según categoría -->
+                                    <Border Grid.Column="0" 
+                                            BackgroundColor="#2B2D3C" 
+                                            StrokeShape="RoundRectangle 8" 
+                                            WidthRequest="40" 
+                                            HeightRequest="40" 
+                                            Margin="0,0,12,0" 
+                                            Stroke="Transparent">
+                                        <Label Text="{Binding Icono}" 
+                                               FontSize="18" 
+                                               HorizontalOptions="Center" 
+                                               VerticalOptions="Center"/>
+                                    </Border>
+
+                                    <!-- Detalles -->
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                        <Label Text="{Binding Categoria}" FontAttributes="Bold" TextColor="White" FontSize="14"/>
                                         <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}"
-                                               FontSize="12" TextColor="#9E9E9E"/>
+                                               FontSize="11" TextColor="#9E9E9E"/>
                                     </VerticalStackLayout>
-                                    <Label Grid.Column="1"
+
+                                    <!-- Monto -->
+                                    <Label Grid.Column="2"
                                            Text="{Binding Monto, StringFormat='{0:C}'}"
                                            FontAttributes="Bold"
+                                           FontSize="15"
                                            VerticalOptions="Center"
                                            TextColor="{Binding Tipo, Converter={StaticResource TipoAColorConverter}}"/>
                                 </Grid>
