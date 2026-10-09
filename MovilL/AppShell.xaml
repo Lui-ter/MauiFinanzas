@@ -11,7 +11,10 @@
                   Shell.NavBarIsVisible="False"
                   Shell.TabBarIsVisible="False"/>
 
-    <TabBar>
+    <TabBar Shell.TabBarIsVisible="False">
+        <ShellContent Title="Home"
+                      ContentTemplate="{DataTemplate views:Inicio}"
+                      Route="Inicio"/>
         <ShellContent Title="Nuevo"
                       ContentTemplate="{DataTemplate views:NuevoMovimientoPage}"
                       Route="NuevoMovimientoPage"/>

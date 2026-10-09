@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilL.views.Menu"
+             ZIndex="99"
+             IsVisible="False">
+
+    <Grid x:Name="MenuRootGrid" HorizontalOptions="Fill" VerticalOptions="Fill">
+
+        <!-- Fondo semitransparente con detector de tap para cerrar -->
+        <BoxView x:Name="OverlayFondo"
+                 Color="#B3000000"
+                 Opacity="0"
+                 HorizontalOptions="Fill"
+                 VerticalOptions="Fill">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCerrarMenuClicked"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <!-- Panel lateral deslizable desde la derecha -->
+        <Border x:Name="PanelMenu"
+                HorizontalOptions="End"
+                VerticalOptions="Fill"
+                WidthRequest="320"
+                BackgroundColor="#181B26"
+                Stroke="#2A3043"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 24, 0, 0, 24"
+                Padding="0"
+                TranslationX="340">
+            <Border.Shadow>
+                <Shadow Brush="Black" Offset="-6,0" Radius="20" Opacity="0.5"/>
+            </Border.Shadow>
+
+            <Grid RowDefinitions="Auto, *, Auto">
+
+                <!-- ENCABEZADO CON BOTÓN CERRAR -->
+                <Grid Grid.Row="0" ColumnDefinitions="*, Auto" Padding="20, 20, 16, 10">
+                    <Label Text="Menú de Usuario"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           VerticalOptions="Center"/>
+                    <Button Grid.Column="1"
+                            Text="✕"
+                            FontSize="16"
+                            TextColor="#9E9E9E"
+                            BackgroundColor="Transparent"
+                            BorderWidth="0"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            CornerRadius="20"
+                            Clicked="OnCerrarMenuClicked"/>
+                </Grid>
+
+                <!-- CONTENIDO SCROLLEABLE -->
+                <ScrollView Grid.Row="1" Padding="20, 10">
+                    <VerticalStackLayout Spacing="22">
+
+                        <!-- TARJETA DE PERFIL DEL USUARIO -->
+                        <Border BackgroundColor="#212638"
+                                Stroke="#323A52"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 18"
+                                Padding="16">
+                            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                                
+                                <Border WidthRequest="84"
+                                        HeightRequest="84"
+                                        StrokeShape="RoundRectangle 42"
+                                        Stroke="#4CAF50"
+                                        StrokeThickness="2.5"
+                                        BackgroundColor="#2A3043"
+                                        Padding="0"
+                                        HorizontalOptions="Center">
+                                    <Image x:Name="ImgUsuarioMenu"
+                                           Aspect="AspectFill"
+                                           WidthRequest="84"
+                                           HeightRequest="84"/>
+                                </Border>
+
+                                <VerticalStackLayout Spacing="3" HorizontalOptions="Center">
+                                    <Label x:Name="LblNombreUsuarioMenu"
+                                           Text="Usuario"
+                                           FontAttributes="Bold"
+                                           FontSize="17"
+                                           TextColor="White"
+                                           HorizontalOptions="Center"/>
+                                    <Label x:Name="LblCorreoUsuarioMenu"
+                                           Text="correo@ejemplo.com"
+                                           FontSize="13"
+                                           TextColor="#8E95A5"
+                                           HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+
+                                <!-- Badge de rol/estado -->
+                                <Border x:Name="BadgeRol"
+                                        BackgroundColor="#223C2D"
+                                        Stroke="#3D704E"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 12"
+                                        Padding="10, 4"
+                                        HorizontalOptions="Center">
+                                    <Label x:Name="LblRolUsuarioMenu"
+                                           Text="Sesión Activa"
+                                           FontSize="11"
+                                           FontAttributes="Bold"
+                                           TextColor="#81C784"/>
+                                </Border>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- OPCIONES DE NAVEGACIÓN -->
+                        <VerticalStackLayout Spacing="12">
+                            <Label Text="GESTIÓN Y AJUSTES"
+                                   FontSize="11"
+                                   FontAttributes="Bold"
+                                   TextColor="#8E95A5"
+                                   Margin="4, 0"/>
+
+                            <!-- Opción 1: Perfil -->
+                            <Border BackgroundColor="#212638"
+                                    Stroke="#2E354A"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 14"
+                                    Padding="14, 12">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnPerfilClicked"/>
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="12" VerticalOptions="Center">
+                                    <Border Grid.Column="0"
+                                            WidthRequest="38"
+                                            HeightRequest="38"
+                                            StrokeShape="RoundRectangle 19"
+                                            Stroke="Transparent"
+                                            BackgroundColor="#2E3C2B">
+                                        <Label Text="👤" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                        <Label Text="Mi Perfil" FontAttributes="Bold" FontSize="15" TextColor="White"/>
+                                        <Label Text="Ver y gestionar información personal" FontSize="12" TextColor="#8E95A5"/>
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="2" Text="➔" FontSize="14" TextColor="#8E95A5" VerticalOptions="Center"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Opción 2: Configuración -->
+                            <Border BackgroundColor="#212638"
+                                    Stroke="#2E354A"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 14"
+                                    Padding="14, 12">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnConfigurarClicked"/>
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="12" VerticalOptions="Center">
+                                    <Border Grid.Column="0"
+                                            WidthRequest="38"
+                                            HeightRequest="38"
+                                            StrokeShape="RoundRectangle 19"
+                                            Stroke="Transparent"
+                                            BackgroundColor="#243444">
+                                        <Label Text="⚙️" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                        <Label Text="Configuración" FontAttributes="Bold" FontSize="15" TextColor="White"/>
+                                        <Label Text="Moneda, notificaciones y seguridad" FontSize="12" TextColor="#8E95A5"/>
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="2" Text="➔" FontSize="14" TextColor="#8E95A5" VerticalOptions="Center"/>
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </ScrollView>
+
+                <!-- BOTÓN CERRAR SESIÓN EN EL PIE -->
+                <Border Grid.Row="2"
+                        BackgroundColor="#181B26"
+                        Stroke="#2A3043"
+                        StrokeThickness="1"
+                        Padding="20, 15">
+                    <Button Text="Cerrar sesión"
+                            ImageSource="user.png"
+                            BackgroundColor="#D32F2F"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            CornerRadius="12"
+                            HeightRequest="46"
+                            Clicked="OnCerrarSesionClicked"/>
+                </Border>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentView>
+

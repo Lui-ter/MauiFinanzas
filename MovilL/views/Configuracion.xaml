@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MovilL.views"
+             x:Class="MovilL.views.Configuracion"
+             Title="Configuración"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="#12141D">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="ToolbarUsuario"
+                     IconImageSource="user.png"
+                     Text="Perfil"
+                     Clicked="OnUsuarioClicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid x:Name="MainGrid" RowDefinitions="*, Auto">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="24" Spacing="24" MaximumWidthRequest="720" HorizontalOptions="Center">
+
+                <!-- PREFERENCIAS GENERALES -->
+                <Border BackgroundColor="#1A1D29"
+                        Stroke="#2F364C"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 22"
+                        Padding="26">
+                    <VerticalStackLayout Spacing="20">
+
+                        <Label Text="PREFERENCIAS DE APLICACIÓN"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#81C784"/>
+
+                        <!-- Moneda Principal -->
+                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
+                                <Label Text="Moneda principal" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Moneda para el formato de balances" FontSize="13" TextColor="#8E95A5"/>
+                            </VerticalStackLayout>
+
+                            <Border Grid.Column="1"
+                                    StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#25293A"
+                                    Stroke="#3A405A"
+                                    StrokeThickness="1"
+                                    Padding="14, 0"
+                                    WidthRequest="130"
+                                    HeightRequest="46">
+                                <Picker x:Name="PickerMoneda" TextColor="White" FontSize="14" VerticalTextAlignment="Center">
+                                    <Picker.Items>
+                                        <x:String>COP ($)</x:String>
+                                        <x:String>USD ($)</x:String>
+                                        <x:String>EUR (€)</x:String>
+                                        <x:String>MXN ($)</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </Border>
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="#2A3043"/>
+
+                        <!-- Confirmar antes de guardar -->
+                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
+                                <Label Text="Confirmar movimientos" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Preguntar antes de registrar transacciones" FontSize="13" TextColor="#8E95A5"/>
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" x:Name="SwitchConfirmar" IsToggled="True" OnColor="#4CAF50"/>
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="#2A3043"/>
+
+                        <!-- Notificaciones -->
+                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
+                                <Label Text="Recordatorios diarios" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Recibir aviso para registrar gastos del día" FontSize="13" TextColor="#8E95A5"/>
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" x:Name="SwitchNotificaciones" IsToggled="True" OnColor="#4CAF50"/>
+                        </Grid>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- SEGURIDAD -->
+                <Border BackgroundColor="#1A1D29"
+                        Stroke="#2F364C"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 22"
+                        Padding="26">
+                    <VerticalStackLayout Spacing="20">
+
+                        <Label Text="SEGURIDAD Y PRIVACIDAD"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#81C784"/>
+
+                        <!-- Bloqueo biométrico/PIN -->
+                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
+                                <Label Text="Bloqueo al salir" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Solicitar clave al reanudar la app" FontSize="13" TextColor="#8E95A5"/>
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" x:Name="SwitchBloqueo" IsToggled="False" OnColor="#4CAF50"/>
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="#2A3043"/>
+
+                        <!-- Modo Oscuro -->
+                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
+                                <Label Text="Tema Oscuro" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Paleta de alto contraste y descanso visual" FontSize="13" TextColor="#8E95A5"/>
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" x:Name="SwitchModoOscuro" IsToggled="True" OnColor="#4CAF50" IsEnabled="False"/>
+                        </Grid>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- ACERCA DE -->
+                <Border BackgroundColor="#1A1D29"
+                        Stroke="#2F364C"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 22"
+                        Padding="26">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="ACERCA DE LA APLICACIÓN"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#81C784"/>
+                        <Label Text="MovilL - Gestor Financiero Personal" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="Versión 1.0.0" FontSize="13" TextColor="#8E95A5"/>
+                        <Label Text="Plataforma desarrollada en .NET MAUI para el seguimiento y control ágil de gastos e ingresos."
+                               FontSize="13"
+                               TextColor="#B0B5C6"
+                               LineHeight="1.3"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- BOTÓN GUARDAR -->
+                <Button Text="Guardar Ajustes"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        CornerRadius="12"
+                        HeightRequest="52"
+                        Clicked="OnGuardarAjustesClicked"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Barra de navegación inferior -->
+        <views:Navegador Grid.Row="1" PaginaActiva=""/>
+
+        <!-- Menú lateral deslizable -->
+        <views:Menu x:Name="MenuUsuario" Grid.RowSpan="2"/>
+
+    </Grid>
+</ContentPage>
+

@@ -19,11 +19,20 @@ public partial class UsuarioPanelView : ContentView
 
     public void CargarUsuario()
     {
-        LblNombreUsuario.Text = Sesion.EsInvitado
-            ? "Invitado"
-            : Sesion.NombreUsuario;
-
-        ImgUsuario.Source = ImageSource.FromFile("user.png");
+        var usuario = Sesion.UsuarioActual;
+        if (usuario != null)
+        {
+            LblNombreUsuario.Text = usuario.Nombre;
+            string imagen = string.IsNullOrWhiteSpace(usuario.Imagen) ? "user.png" : usuario.Imagen;
+            ImgUsuario.Source = ImageSource.FromFile(imagen);
+        }
+        else
+        {
+            LblNombreUsuario.Text = Sesion.EsInvitado
+                ? "Invitado"
+                : (string.IsNullOrEmpty(Sesion.NombreUsuario) ? "Usuario" : Sesion.NombreUsuario);
+            ImgUsuario.Source = ImageSource.FromFile("user.png");
+        }
     }
 
     // Método público para que cualquier página abra/cierre el panel
@@ -31,12 +40,12 @@ public partial class UsuarioPanelView : ContentView
     {
         if (!isPanelOpen)
         {
-            await UsuarioPanel.TranslateTo(0, 0, 300, Easing.CubicOut);
+            await UsuarioPanel.TranslateToAsync(0, 0, 300, Easing.CubicOut);
             isPanelOpen = true;
         }
         else
         {
-            await UsuarioPanel.TranslateTo(300, 0, 300, Easing.CubicIn);
+            await UsuarioPanel.TranslateToAsync(300, 0, 300, Easing.CubicIn);
             isPanelOpen = false;
         }
     }

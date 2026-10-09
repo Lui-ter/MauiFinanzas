@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MovilL.Views.Controls"
+             xmlns:views="clr-namespace:MovilL.views"
+             x:Class="MovilL.views.Inicio"
+             Title="Inicio"
+             Shell.TabBarIsVisible="False">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="ToolbarUsuario"
+                     IconImageSource="user.png"
+                     Text="Perfil"
+                     Clicked="OnUsuarioClicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid x:Name="MainGrid" RowDefinitions="*, Auto">
+
+        <!-- Contenido principal scrolleable -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20" Spacing="22" MaximumWidthRequest="700" HorizontalOptions="Center">
+
+                <!-- ENCABEZADO / HERO -->
+                <Border BackgroundColor="#1A1D29"
+                        Stroke="#333A4E"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="22">
+                    <VerticalStackLayout Spacing="10">
+                        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                            <Label Text="👋" FontSize="26"/>
+                            <Label x:Name="LabelSaludo"
+                                   Text="¡Bienvenido a MovilL!"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+
+                        <Label Text="Tu gestor financiero personal todo en uno. Diseñado para darte claridad, control y mejores decisiones sobre tus ingresos y gastos diarios."
+                               FontSize="14"
+                               TextColor="#B0B5C6"
+                               LineHeight="1.3"/>
+
+                        <!-- Tarjeta resumen rápido de estado financiero -->
+                        <Border BackgroundColor="#25293A"
+                                Stroke="#3A405A"
+                                StrokeShape="RoundRectangle 12"
+                                Padding="15"
+                                Margin="0, 8, 0, 0">
+                            <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10">
+                                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                    <Label Text="Balance Actual" FontSize="11" TextColor="#9E9E9E"/>
+                                    <Label x:Name="LabelBalanceRapido" Text="$0.00" FontSize="16" FontAttributes="Bold" TextColor="White"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                    <Label Text="Ingresos" FontSize="11" TextColor="#81C784"/>
+                                    <Label x:Name="LabelIngresosRapido" Text="$0.00" FontSize="15" FontAttributes="Bold" TextColor="#81C784"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="2" Spacing="2">
+                                    <Label Text="Gastos" FontSize="11" TextColor="#E57373"/>
+                                    <Label x:Name="LabelGastosRapido" Text="$0.00" FontSize="15" FontAttributes="Bold" TextColor="#E57373"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- SECCIÓN: PRESENTACIÓN DE FUNCIONALIDADES -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="¿CÓMO FUNCIONA ESTA APLICACIÓN?"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="#81C784"
+                           Margin="4, 0"/>
+
+                    <!-- Tarjeta 1: Registro de Movimientos -->
+                    <Border BackgroundColor="#1A1D29"
+                            Stroke="#333A4E"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 16"
+                            Padding="18">
+                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
+                            <Border Grid.Column="0"
+                                    WidthRequest="48"
+                                    HeightRequest="48"
+                                    StrokeShape="RoundRectangle 24"
+                                    Stroke="Transparent"
+                                    BackgroundColor="#2E3C2B"
+                                    VerticalOptions="Start">
+                                <Label Text="➕" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Label Text="1. Registro Ágil de Movimientos"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="White"/>
+                                <Label Text="Añade entradas de dinero o consumos diarios al instante. Asigna montos, fecha y categorízalos (sueldo, comida, arriendo, servicios, transporte o estudios) con vista previa antes de guardar."
+                                       FontSize="13"
+                                       TextColor="#B0B5C6"
+                                       LineHeight="1.25"/>
+                                <Button Text="Registrar un Movimiento →"
+                                        BackgroundColor="#2C3446"
+                                        TextColor="#4CAF50"
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        CornerRadius="8"
+                                        HorizontalOptions="Start"
+                                        Padding="14, 6"
+                                        Margin="0, 4, 0, 0"
+                                        Clicked="OnIrAMovimientoClicked"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <!-- Tarjeta 2: Resumen y Analítica Visual -->
+                    <Border BackgroundColor="#1A1D29"
+                            Stroke="#333A4E"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 16"
+                            Padding="18">
+                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
+                            <Border Grid.Column="0"
+                                    WidthRequest="48"
+                                    HeightRequest="48"
+                                    StrokeShape="RoundRectangle 24"
+                                    Stroke="Transparent"
+                                    BackgroundColor="#233446"
+                                    VerticalOptions="Start">
+                                <Label Text="📊" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Label Text="2. Resumen &amp; Métricas en Tiempo Real"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="White"/>
+                                <Label Text="Revisa tu salud financiera general. Visualiza gráficos de dona con la proporción entre lo que ganas y gastas, métricas automáticas y el historial ordenado de transacciones."
+                                       FontSize="13"
+                                       TextColor="#B0B5C6"
+                                       LineHeight="1.25"/>
+                                <Button Text="Consultar mi Resumen →"
+                                        BackgroundColor="#2C3446"
+                                        TextColor="#64B5F6"
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        CornerRadius="8"
+                                        HorizontalOptions="Start"
+                                        Padding="14, 6"
+                                        Margin="0, 4, 0, 0"
+                                        Clicked="OnIrAResumenClicked"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <!-- Tarjeta 3: Categorización y Hábitos -->
+                    <Border BackgroundColor="#1A1D29"
+                            Stroke="#333A4E"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 16"
+                            Padding="18">
+                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
+                            <Border Grid.Column="0"
+                                    WidthRequest="48"
+                                    HeightRequest="48"
+                                    StrokeShape="RoundRectangle 24"
+                                    Stroke="Transparent"
+                                    BackgroundColor="#423423"
+                                    VerticalOptions="Start">
+                                <Label Text="🎯" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Label Text="3. Clasificación Inteligente"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="White"/>
+                                <Label Text="Identifica con precisión cuáles son tus mayores focos de gasto para detectar fugas de dinero y planificar tus metas de ahorro mes a mes."
+                                       FontSize="13"
+                                       TextColor="#B0B5C6"
+                                       LineHeight="1.25"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <!-- Tarjeta 4: Perfil y Seguridad -->
+                    <Border BackgroundColor="#1A1D29"
+                            Stroke="#333A4E"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 16"
+                            Padding="18">
+                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
+                            <Border Grid.Column="0"
+                                    WidthRequest="48"
+                                    HeightRequest="48"
+                                    StrokeShape="RoundRectangle 24"
+                                    Stroke="Transparent"
+                                    BackgroundColor="#342844"
+                                    VerticalOptions="Start">
+                                <Label Text="🛡️" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                <Label Text="4. Seguridad &amp; Modo Invitado"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="White"/>
+                                <Label Text="Accede con tus credenciales seguras o explora la aplicación en modo invitado. Puedes administrar tu perfil en cualquier momento desde el botón superior."
+                                       FontSize="13"
+                                       TextColor="#B0B5C6"
+                                       LineHeight="1.25"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- CONSEJO FINANCIERO -->
+                <Border BackgroundColor="#18231C"
+                        Stroke="#2D4B34"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="16">
+                    <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                        <Label Text="💡" FontSize="22" VerticalOptions="Center"/>
+                        <VerticalStackLayout Spacing="3" VerticalOptions="Center">
+                            <Label Text="Consejo Financiero del Día" FontAttributes="Bold" FontSize="13" TextColor="#A5D6A7"/>
+                            <Label Text="Aplica la regla 50/30/20: 50% necesidades básicas, 30% gustos personales y 20% ahorro e inversión."
+                                   FontSize="12"
+                                   TextColor="#E8F5E9"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Barra de navegación inferior -->
+        <views:Navegador Grid.Row="1" PaginaActiva="Home"/>
+
+        <!-- Menú lateral de usuario -->
+        <views:Menu x:Name="MenuUsuario" Grid.RowSpan="2"/>
+
+    </Grid>
+</ContentPage>
+

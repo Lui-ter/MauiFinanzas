@@ -2,17 +2,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:MovilL.Views.Controls"
+             xmlns:views="clr-namespace:MovilL.views"
              x:Class="MovilL.views.NuevoMovimientoPage"
-             Title="Nuevo movimiento">
+             Title="Nuevo movimiento"
+             Shell.TabBarIsVisible="False">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="👤" Clicked="OnUsuarioClicked"/>
+        <ToolbarItem x:Name="ToolbarUsuario"
+                     IconImageSource="user.png"
+                     Text="Perfil"
+                     Clicked="OnUsuarioClicked"/>
     </ContentPage.ToolbarItems>
 
-    <Grid x:Name="MainGrid" ColumnDefinitions="*,*">
+    <Grid x:Name="MainGrid" RowDefinitions="*, Auto" ColumnDefinitions="*,*">
 
         <!-- Lado izquierdo: Formulario de entrada -->
-        <ScrollView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="500">
+        <ScrollView Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="500">
             <VerticalStackLayout Spacing="15" Padding="20" WidthRequest="390">
 
                 <Label Text="FORMULARIO"
@@ -83,7 +88,6 @@
                                IsVisible="False"
                                HorizontalOptions="Center"
                                HorizontalTextAlignment="Center"/>
-
                     </VerticalStackLayout>
                 </Border>
 
@@ -91,7 +95,7 @@
         </ScrollView>
 
         <!-- Lado derecho: PREVIEW Y BOTÓN GUARDAR -->
-        <ScrollView Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="450">
+        <ScrollView Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="450">
             <VerticalStackLayout Spacing="15" Padding="20" WidthRequest="380">
 
                 <Label Text="RESUMEN" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" TextColor="White"/>
@@ -173,7 +177,11 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <controls:UsuarioPanelView x:Name="PanelUsuario" Grid.ColumnSpan="2"/>
+        <!-- Barra de navegación inferior -->
+        <views:Navegador Grid.Row="1" Grid.ColumnSpan="2" PaginaActiva="Movimiento"/>
+
+        <!-- Menú lateral de usuario -->
+        <views:Menu x:Name="MenuUsuario" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
 
     </Grid>
 </ContentPage>

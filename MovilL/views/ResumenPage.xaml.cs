@@ -14,7 +14,8 @@ public partial class ResumenPage : ContentPage
     {
         base.OnAppearing();
         ActualizarResumen();
-        PanelUsuario.CargarUsuario();
+        MenuUsuario.CargarUsuario();
+        ToolbarUsuario.IconImageSource = Sesion.UsuarioActual?.Imagen ?? "user.png";
     }
 
     private void ActualizarResumen()
@@ -46,7 +47,7 @@ public partial class ResumenPage : ContentPage
 
     private async void OnUsuarioClicked(object? sender, EventArgs e)
     {
-        await PanelUsuario.AbrirCerrarPanel();
+        await MenuUsuario.AbrirCerrarMenu();
     }
 }
 

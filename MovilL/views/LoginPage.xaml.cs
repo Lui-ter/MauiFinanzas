@@ -1,11 +1,9 @@
+using MovilL.Models;
+
 namespace MovilL.views;
 
 public partial class LoginPage : ContentPage
 {
-    // Credenciales quemadas para esta etapa del proyecto
-    private const string UsuarioValido = "admin";
-    private const string ContrasenaValida = "1234";
-
     public LoginPage()
     {
         InitializeComponent();
@@ -13,14 +11,21 @@ public partial class LoginPage : ContentPage
 
     private async void OnIniciarSesionClicked(object? sender, EventArgs e)
     {
-        if (EntryUsuario.Text == UsuarioValido && EntryContrasena.Text == ContrasenaValida)
+        string userText = EntryUsuario.Text?.Trim() ?? string.Empty;
+        string passText = EntryContrasena.Text?.Trim() ?? string.Empty;
+
+        var usuario = Usuario.ValidarCredenciales(userText, passText);
+
+        if (usuario != null)
         {
             Sesion.CerrarSesion();
             Sesion.EstaLogueado = true;
             Sesion.EsInvitado = false;
-            Sesion.NombreUsuario = UsuarioValido;
+            Sesion.NombreUsuario = usuario.Nombre;
+            Sesion.UsuarioActual = usuario;
 
-            await Shell.Current.GoToAsync("//NuevoMovimientoPage");
+            LabelError.IsVisible = false;
+            await Shell.Current.GoToAsync("//Inicio");
         }
         else
         {
@@ -34,7 +39,17 @@ public partial class LoginPage : ContentPage
         Sesion.EstaLogueado = true;
         Sesion.EsInvitado = true;
         Sesion.NombreUsuario = "Invitado";
+        Sesion.UsuarioActual = new Usuario
+        {
+            Id = 0,
+            Nombre = "Invitado",
+            NombreUsuario = "invitado",
+            Contrasena = "",
+            Edad = 0,
+            Correo = "invitado@movill.com",
+            Imagen = "user.png"
+        };
 
-        await Shell.Current.GoToAsync("//NuevoMovimientoPage");
+        await Shell.Current.GoToAsync("//Inicio");
     }
 }

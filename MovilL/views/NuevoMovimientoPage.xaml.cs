@@ -18,12 +18,13 @@ public partial class NuevoMovimientoPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        PanelUsuario.CargarUsuario();
+        MenuUsuario.CargarUsuario();
+        ToolbarUsuario.IconImageSource = Sesion.UsuarioActual?.Imagen ?? "user.png";
     }
 
     private async void OnUsuarioClicked(object? sender, EventArgs e)
     {
-        await PanelUsuario.AbrirCerrarPanel();
+        await MenuUsuario.AbrirCerrarMenu();
     }
 
     // Se dispara cuando se cambia entre "Ingreso" y "Gasto"

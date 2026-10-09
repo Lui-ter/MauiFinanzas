@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:MovilL.views"
+             x:Class="MovilL.views.Perfil"
+             Title="Mi Perfil"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="#12141D">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="ToolbarUsuario"
+                     IconImageSource="user.png"
+                     Text="Perfil"
+                     Clicked="OnUsuarioClicked"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid x:Name="MainGrid" RowDefinitions="*, Auto">
+
+        <!-- CONTENIDO SCROLLEABLE -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="24" Spacing="24" MaximumWidthRequest="720" HorizontalOptions="Center">
+
+                <!-- CABECERA DE PERFIL -->
+                <Border BackgroundColor="#1A1D29"
+                        Stroke="#2F364C"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 24"
+                        Padding="26">
+                    <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
+
+                        <!-- Foto de Perfil con Anillo Decorativo Grande -->
+                        <Border WidthRequest="120"
+                                HeightRequest="120"
+                                StrokeShape="RoundRectangle 60"
+                                Stroke="#4CAF50"
+                                StrokeThickness="3.5"
+                                BackgroundColor="#24293A"
+                                Padding="0"
+                                HorizontalOptions="Center">
+                            <Image x:Name="ImgPerfil"
+                                   Aspect="AspectFill"
+                                   WidthRequest="120"
+                                   HeightRequest="120"/>
+                        </Border>
+
+                        <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                            <Label x:Name="LblNombreHeader"
+                                   Text="Nombre de Usuario"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"/>
+                            <Label x:Name="LblUsernameHeader"
+                                   Text="@usuario"
+                                   FontSize="15"
+                                   TextColor="#81C784"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- Tarjetas de métricas del usuario -->
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="16" Margin="0, 10, 0, 0" WidthRequest="360" HorizontalOptions="Center">
+                            <Border Grid.Column="0"
+                                    BackgroundColor="#24293A"
+                                    Stroke="#373F57"
+                                    StrokeShape="RoundRectangle 14"
+                                    Padding="14">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Movimientos" FontSize="12" TextColor="#8E95A5" HorizontalOptions="Center"/>
+                                    <Label x:Name="LblTotalMovimientos" Text="0" FontSize="18" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border Grid.Column="1"
+                                    BackgroundColor="#24293A"
+                                    Stroke="#373F57"
+                                    StrokeShape="RoundRectangle 14"
+                                    Padding="14">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Tipo de Cuenta" FontSize="12" TextColor="#8E95A5" HorizontalOptions="Center"/>
+                                    <Label x:Name="LblTipoCuenta" Text="Principal" FontSize="16" FontAttributes="Bold" TextColor="#81C784" HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- FORMULARIO DE INFORMACIÓN PERSONAL (AMPLIO Y CÓMODO) -->
+                <Border BackgroundColor="#1A1D29"
+                        Stroke="#2F364C"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 22"
+                        Padding="28">
+                    <VerticalStackLayout Spacing="20">
+
+                        <Label Text="INFORMACIÓN DE LA CUENTA"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="#81C784"/>
+
+                        <!-- Campo: Nombre Completo -->
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Nombre Completo" FontSize="14" FontAttributes="Bold" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="16, 2" HeightRequest="52">
+                                <Entry x:Name="EntryNombre" TextColor="White" FontSize="16" VerticalTextAlignment="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Campo: Correo Electrónico -->
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Correo Electrónico" FontSize="14" FontAttributes="Bold" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="16, 2" HeightRequest="52">
+                                <Entry x:Name="EntryCorreo" TextColor="White" FontSize="16" Keyboard="Email" VerticalTextAlignment="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Campo: Edad -->
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Edad" FontSize="14" FontAttributes="Bold" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="16, 2" HeightRequest="52">
+                                <Entry x:Name="EntryEdad" TextColor="White" FontSize="16" Keyboard="Numeric" VerticalTextAlignment="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Botón para Guardar Cambios -->
+                        <Button Text="Guardar Cambios"
+                                BackgroundColor="#4CAF50"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                CornerRadius="12"
+                                HeightRequest="52"
+                                Margin="0, 12, 0, 0"
+                                Clicked="OnGuardarCambiosClicked"/>
+
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Barra de navegación inferior -->
+        <views:Navegador Grid.Row="1" PaginaActiva=""/>
+
+        <!-- Menú lateral deslizable -->
+        <views:Menu x:Name="MenuUsuario" Grid.RowSpan="2"/>
+
+    </Grid>
+</ContentPage>
+
