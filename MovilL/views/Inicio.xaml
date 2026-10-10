@@ -5,7 +5,8 @@
              xmlns:views="clr-namespace:MovilL.views"
              x:Class="MovilL.views.Inicio"
              Title="Inicio"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="#12141D">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="ToolbarUsuario"

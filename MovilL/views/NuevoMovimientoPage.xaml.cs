@@ -27,11 +27,21 @@ public partial class NuevoMovimientoPage : ContentPage
         await MenuUsuario.AbrirCerrarMenu();
     }
 
+    private bool _cargandoCategorias = false;
+
     // Se dispara cuando se cambia entre "Ingreso" y "Gasto"
     private void OnTipoChanged(object? sender, EventArgs e)
     {
         string tipo = PickerTipo.SelectedItem?.ToString() ?? "Ingreso";
-        CargarCategorias(tipo);
+        _cargandoCategorias = true;
+        try
+        {
+            CargarCategorias(tipo);
+        }
+        finally
+        {
+            _cargandoCategorias = false;
+        }
         ActualizarPreview();
     }
 
@@ -53,6 +63,7 @@ public partial class NuevoMovimientoPage : ContentPage
     // Se dispara cuando cambia cualquier input en el formulario (monto, fecha, categoría seleccionada)
     private void OnFormularioChanged(object? sender, EventArgs e)
     {
+        if (_cargandoCategorias) return;
         ActualizarPreview();
     }
 
@@ -83,7 +94,7 @@ public partial class NuevoMovimientoPage : ContentPage
 
             if (!string.IsNullOrWhiteSpace(categoriaSeleccionada.Imagen))
             {
-                ImagePreviewCategoria.Source = ImageSource.FromFile(categoriaSeleccionada.Imagen);
+                ImagePreviewCategoria.Source = categoriaSeleccionada.Imagen;
                 ImagePreviewCategoria.IsVisible = true;
             }
             else

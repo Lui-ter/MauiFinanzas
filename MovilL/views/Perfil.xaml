@@ -16,68 +16,68 @@
 
     <Grid x:Name="MainGrid" RowDefinitions="*, Auto">
 
-        <!-- CONTENIDO SCROLLEABLE -->
+        <!-- CONTENIDO SCROLLEABLE RESPONSIVO -->
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout Padding="24" Spacing="24" MaximumWidthRequest="720" HorizontalOptions="Center">
+            <VerticalStackLayout Padding="18" Spacing="18" MaximumWidthRequest="480" HorizontalOptions="Center">
 
                 <!-- CABECERA DE PERFIL -->
                 <Border BackgroundColor="#1A1D29"
-                        Stroke="#2F364C"
+                        Stroke="#2E354A"
                         StrokeThickness="1"
-                        StrokeShape="RoundRectangle 24"
-                        Padding="26">
-                    <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
+                        StrokeShape="RoundRectangle 20"
+                        Padding="20">
+                    <VerticalStackLayout Spacing="14" HorizontalOptions="Center">
 
-                        <!-- Foto de Perfil con Anillo Decorativo Grande -->
-                        <Border WidthRequest="120"
-                                HeightRequest="120"
-                                StrokeShape="RoundRectangle 60"
+                        <!-- Foto de Perfil con Anillo Decorativo -->
+                        <Border WidthRequest="100"
+                                HeightRequest="100"
+                                StrokeShape="RoundRectangle 50"
                                 Stroke="#4CAF50"
-                                StrokeThickness="3.5"
+                                StrokeThickness="3"
                                 BackgroundColor="#24293A"
                                 Padding="0"
                                 HorizontalOptions="Center">
                             <Image x:Name="ImgPerfil"
                                    Aspect="AspectFill"
-                                   WidthRequest="120"
-                                   HeightRequest="120"/>
+                                   WidthRequest="100"
+                                   HeightRequest="100"/>
                         </Border>
 
-                        <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                        <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
                             <Label x:Name="LblNombreHeader"
                                    Text="Nombre de Usuario"
-                                   FontSize="24"
+                                   FontSize="22"
                                    FontAttributes="Bold"
                                    TextColor="White"
                                    HorizontalOptions="Center"/>
                             <Label x:Name="LblUsernameHeader"
                                    Text="@usuario"
-                                   FontSize="15"
+                                   FontSize="14"
                                    TextColor="#81C784"
                                    HorizontalOptions="Center"/>
                         </VerticalStackLayout>
 
                         <!-- Tarjetas de métricas del usuario -->
-                        <Grid ColumnDefinitions="*, *" ColumnSpacing="16" Margin="0, 10, 0, 0" WidthRequest="360" HorizontalOptions="Center">
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="12" Margin="0, 4, 0, 0" HorizontalOptions="Fill">
                             <Border Grid.Column="0"
-                                    BackgroundColor="#24293A"
-                                    Stroke="#373F57"
-                                    StrokeShape="RoundRectangle 14"
-                                    Padding="14">
-                                <VerticalStackLayout Spacing="4">
-                                    <Label Text="Movimientos" FontSize="12" TextColor="#8E95A5" HorizontalOptions="Center"/>
-                                    <Label x:Name="LblTotalMovimientos" Text="0" FontSize="18" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
+                                    BackgroundColor="#222738"
+                                    Stroke="#353D54"
+                                    StrokeShape="RoundRectangle 12"
+                                    Padding="12, 10">
+                                <VerticalStackLayout Spacing="3">
+                                    <Label Text="Movimientos" FontSize="11" TextColor="#8E95A5" HorizontalOptions="Center"/>
+                                    <Label x:Name="LblTotalMovimientos" Text="0" FontSize="17" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
                                 </VerticalStackLayout>
                             </Border>
 
                             <Border Grid.Column="1"
-                                    BackgroundColor="#24293A"
-                                    Stroke="#373F57"
-                                    StrokeShape="RoundRectangle 14"
-                                    Padding="14">
-                                <VerticalStackLayout Spacing="4">
-                                    <Label Text="Tipo de Cuenta" FontSize="12" TextColor="#8E95A5" HorizontalOptions="Center"/>
-                                    <Label x:Name="LblTipoCuenta" Text="Principal" FontSize="16" FontAttributes="Bold" TextColor="#81C784" HorizontalOptions="Center"/>
+                                    BackgroundColor="#222738"
+                                    Stroke="#353D54"
+                                    StrokeShape="RoundRectangle 12"
+                                    Padding="12, 10">
+                                <VerticalStackLayout Spacing="3">
+                                    <Label Text="Tipo de Cuenta" FontSize="11" TextColor="#8E95A5" HorizontalOptions="Center"/>
+                                    <Label x:Name="LblTipoCuenta" Text="Principal" FontSize="15" FontAttributes="Bold" TextColor="#81C784" HorizontalOptions="Center"/>
                                 </VerticalStackLayout>
                             </Border>
                         </Grid>
@@ -85,53 +85,149 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- FORMULARIO DE INFORMACIÓN PERSONAL (AMPLIO Y CÓMODO) -->
+                <!-- FORMULARIO CRUD: EDITAR INFORMACIÓN DE LA CUENTA -->
                 <Border BackgroundColor="#1A1D29"
-                        Stroke="#2F364C"
+                        Stroke="#2E354A"
                         StrokeThickness="1"
-                        StrokeShape="RoundRectangle 22"
-                        Padding="28">
-                    <VerticalStackLayout Spacing="20">
+                        StrokeShape="RoundRectangle 20"
+                        Padding="20">
+                    <VerticalStackLayout Spacing="16">
 
-                        <Label Text="INFORMACIÓN DE LA CUENTA"
-                               FontSize="15"
+                        <Label Text="MODIFICAR DATOS DEL PERFIL"
+                               FontSize="11"
                                FontAttributes="Bold"
-                               TextColor="#81C784"/>
+                               TextColor="#81C784"
+                               Margin="2,0"/>
 
                         <!-- Campo: Nombre Completo -->
-                        <VerticalStackLayout Spacing="8">
-                            <Label Text="Nombre Completo" FontSize="14" FontAttributes="Bold" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="16, 2" HeightRequest="52">
-                                <Entry x:Name="EntryNombre" TextColor="White" FontSize="16" VerticalTextAlignment="Center"/>
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Nombre Completo" FontSize="13" FontAttributes="Bold" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 10" BackgroundColor="#222738" Stroke="#353D54" StrokeThickness="1" Padding="14, 0" HeightRequest="48">
+                                <Entry x:Name="EntryNombre" TextColor="White" FontSize="14" VerticalOptions="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Campo: Nombre de Usuario -->
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Nombre de Usuario (@)" FontSize="13" FontAttributes="Bold" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 10" BackgroundColor="#222738" Stroke="#353D54" StrokeThickness="1" Padding="14, 0" HeightRequest="48">
+                                <Entry x:Name="EntryUsername" TextColor="White" FontSize="14" VerticalOptions="Center"/>
                             </Border>
                         </VerticalStackLayout>
 
                         <!-- Campo: Correo Electrónico -->
-                        <VerticalStackLayout Spacing="8">
-                            <Label Text="Correo Electrónico" FontSize="14" FontAttributes="Bold" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="16, 2" HeightRequest="52">
-                                <Entry x:Name="EntryCorreo" TextColor="White" FontSize="16" Keyboard="Email" VerticalTextAlignment="Center"/>
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Correo Electrónico" FontSize="13" FontAttributes="Bold" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 10" BackgroundColor="#222738" Stroke="#353D54" StrokeThickness="1" Padding="14, 0" HeightRequest="48">
+                                <Entry x:Name="EntryCorreo" TextColor="White" FontSize="14" Keyboard="Email" VerticalOptions="Center"/>
                             </Border>
                         </VerticalStackLayout>
 
                         <!-- Campo: Edad -->
-                        <VerticalStackLayout Spacing="8">
-                            <Label Text="Edad" FontSize="14" FontAttributes="Bold" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 12" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="16, 2" HeightRequest="52">
-                                <Entry x:Name="EntryEdad" TextColor="White" FontSize="16" Keyboard="Numeric" VerticalTextAlignment="Center"/>
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Edad" FontSize="13" FontAttributes="Bold" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 10" BackgroundColor="#222738" Stroke="#353D54" StrokeThickness="1" Padding="14, 0" HeightRequest="48">
+                                <Entry x:Name="EntryEdad" TextColor="White" FontSize="14" Keyboard="Numeric" VerticalOptions="Center"/>
                             </Border>
                         </VerticalStackLayout>
 
-                        <!-- Botón para Guardar Cambios -->
-                        <Button Text="Guardar Cambios"
+                        <!-- Campo: Contraseña -->
+                        <VerticalStackLayout Spacing="6">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Text="Contraseña" FontSize="13" FontAttributes="Bold" TextColor="#B0B5C6" VerticalOptions="Center"/>
+                                <Button x:Name="BtnToggleContrasena"
+                                        Grid.Column="1"
+                                        Text="👁 Mostrar"
+                                        FontSize="11"
+                                        TextColor="#8E95A5"
+                                        BackgroundColor="Transparent"
+                                        Padding="0"
+                                        HeightRequest="24"
+                                        Clicked="OnToggleContrasenaClicked"/>
+                            </Grid>
+                            <Border StrokeShape="RoundRectangle 10" BackgroundColor="#222738" Stroke="#353D54" StrokeThickness="1" Padding="14, 0" HeightRequest="48">
+                                <Entry x:Name="EntryContrasena"
+                                       TextColor="White"
+                                       FontSize="14"
+                                       IsPassword="True"
+                                       VerticalOptions="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Mensaje de Estado -->
+                        <Label x:Name="LabelMensajePerfil"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               TextColor="#81C784"
+                               IsVisible="False"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               Margin="0, 2"/>
+
+                        <!-- Botón para Guardar Cambios (UPDATE) -->
+                        <Button x:Name="BtnGuardarCambios"
+                                Text="Guardar Cambios"
                                 BackgroundColor="#4CAF50"
                                 TextColor="White"
                                 FontAttributes="Bold"
-                                FontSize="16"
-                                CornerRadius="12"
-                                HeightRequest="52"
-                                Margin="0, 12, 0, 0"
+                                FontSize="15"
+                                CornerRadius="10"
+                                HeightRequest="48"
+                                Margin="0, 6, 0, 0"
                                 Clicked="OnGuardarCambiosClicked"/>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- ACCIONES AVANZADAS DE CUENTA (CRUD) -->
+                <Border BackgroundColor="#1A1D29"
+                        Stroke="#2E354A"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="20">
+                    <VerticalStackLayout Spacing="14">
+
+                        <Label Text="GESTIÓN Y ACCIONES DE CUENTA"
+                               FontSize="11"
+                               FontAttributes="Bold"
+                               TextColor="#8E95A5"
+                               Margin="2,0"/>
+
+                        <!-- Botón para Invitado: Guardar como permanente (CREATE) -->
+                        <Button x:Name="BtnRegistrarPermanente"
+                                Text="Convertir en Cuenta Registrada"
+                                BackgroundColor="#2E7D32"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                CornerRadius="10"
+                                HeightRequest="46"
+                                IsVisible="False"
+                                Clicked="OnRegistrarPermanenteClicked"/>
+
+                        <!-- Botón Restablecer Datos (READ/REVERT) -->
+                        <Button Text="Restablecer Valores Actuales"
+                                BackgroundColor="#24293A"
+                                TextColor="#90CAF9"
+                                BorderColor="#353D54"
+                                BorderWidth="1"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                CornerRadius="10"
+                                HeightRequest="46"
+                                Clicked="OnRestablecerValoresClicked"/>
+
+                        <!-- Botón Eliminar Cuenta (DELETE) -->
+                        <Button Text="Eliminar Cuenta y Datos"
+                                BackgroundColor="#3B1E1E"
+                                TextColor="#FF5252"
+                                BorderColor="#5B2B2B"
+                                BorderWidth="1"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                CornerRadius="10"
+                                HeightRequest="46"
+                                Clicked="OnEliminarCuentaClicked"/>
 
                     </VerticalStackLayout>
                 </Border>

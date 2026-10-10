@@ -8,30 +8,28 @@
     <Grid x:Name="MenuRootGrid" HorizontalOptions="Fill" VerticalOptions="Fill">
 
         <!-- Fondo semitransparente con detector de tap para cerrar -->
-        <BoxView x:Name="OverlayFondo"
-                 Color="#B3000000"
-                 Opacity="0"
-                 HorizontalOptions="Fill"
-                 VerticalOptions="Fill">
-            <BoxView.GestureRecognizers>
+        <Grid x:Name="OverlayFondo"
+              BackgroundColor="#B3000000"
+              Opacity="0"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill">
+            <Grid.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnCerrarMenuClicked"/>
-            </BoxView.GestureRecognizers>
-        </BoxView>
+            </Grid.GestureRecognizers>
+        </Grid>
 
         <!-- Panel lateral deslizable desde la derecha -->
         <Border x:Name="PanelMenu"
                 HorizontalOptions="End"
                 VerticalOptions="Fill"
-                WidthRequest="320"
+                WidthRequest="300"
+                MaximumWidthRequest="320"
                 BackgroundColor="#181B26"
                 Stroke="#2A3043"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 24, 0, 0, 24"
                 Padding="0"
                 TranslationX="340">
-            <Border.Shadow>
-                <Shadow Brush="Black" Offset="-6,0" Radius="20" Opacity="0.5"/>
-            </Border.Shadow>
 
             <Grid RowDefinitions="Auto, *, Auto">
 
@@ -181,8 +179,7 @@
                         Stroke="#2A3043"
                         StrokeThickness="1"
                         Padding="20, 15">
-                    <Button Text="Cerrar sesión"
-                            ImageSource="user.png"
+                    <Button Text="Cerrar sesión"                       
                             BackgroundColor="#D32F2F"
                             TextColor="White"
                             FontAttributes="Bold"

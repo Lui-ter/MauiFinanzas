@@ -25,7 +25,7 @@ public partial class Menu : ContentView
             LblNombreUsuarioMenu.Text = usuario.Nombre;
             LblCorreoUsuarioMenu.Text = string.IsNullOrWhiteSpace(usuario.Correo) ? "@" + usuario.NombreUsuario : usuario.Correo;
             string imagen = string.IsNullOrWhiteSpace(usuario.Imagen) ? "user.png" : usuario.Imagen;
-            ImgUsuarioMenu.Source = ImageSource.FromFile(imagen);
+            ImgUsuarioMenu.Source = imagen;
 
             if (Sesion.EsInvitado)
             {
@@ -46,7 +46,7 @@ public partial class Menu : ContentView
         {
             LblNombreUsuarioMenu.Text = Sesion.EsInvitado ? "Invitado" : (!string.IsNullOrEmpty(Sesion.NombreUsuario) ? Sesion.NombreUsuario : "Usuario");
             LblCorreoUsuarioMenu.Text = "Sin sesión activa";
-            ImgUsuarioMenu.Source = ImageSource.FromFile("user.png");
+            ImgUsuarioMenu.Source = "user.png";
             LblRolUsuarioMenu.Text = "Invitado";
         }
     }
@@ -55,11 +55,16 @@ public partial class Menu : ContentView
     {
         if (!isMenuOpen)
         {
-            this.IsVisible = true;
             CargarUsuario();
+            PanelMenu.TranslationX = 350;
+            OverlayFondo.Opacity = 0;
+            this.IsVisible = true;
 
-            _ = OverlayFondo.FadeToAsync(1.0, 250);
-            await PanelMenu.TranslateToAsync(0, 0, 300, Easing.CubicOut);
+            // Espera mínima para que el layout nativo de Android procese la visibilidad
+            await Task.Delay(30);
+
+            _ = OverlayFondo.FadeToAsync(1.0, 200);
+            await PanelMenu.TranslateToAsync(0, 0, 250, Easing.CubicOut);
             isMenuOpen = true;
         }
         else
@@ -70,8 +75,8 @@ public partial class Menu : ContentView
 
     private async Task CerrarMenuAnimado()
     {
-        _ = OverlayFondo.FadeToAsync(0, 200);
-        await PanelMenu.TranslateToAsync(340, 0, 250, Easing.CubicIn);
+        _ = OverlayFondo.FadeToAsync(0, 150);
+        await PanelMenu.TranslateToAsync(350, 0, 200, Easing.CubicIn);
         isMenuOpen = false;
         this.IsVisible = false;
     }

@@ -31,7 +31,11 @@ public class Categoria
         new Categoria(3, "Transporte", "transporte.jpg", "Gasto"),
         new Categoria(4, "Arriendo", "arriendo.jpg", "Gasto"),
         new Categoria(5, "Servicios", "servicios.jpg", "Gasto"),
-        new Categoria(6, "Estudio", "estudio.jpg", "Gasto")
+        new Categoria(6, "Estudio", "estudio.jpg", "Gasto"),
+
+        // Ingresos
+        new Categoria(1, "Inversion", "inversion.jpg", "Ingreso"),
+        new Categoria(1, "Negocio", "negocio.jpg", "Ingreso"),
     };
 }
 

@@ -20,13 +20,13 @@ public partial class ResumenPage : ContentPage
 
     private void ActualizarResumen()
     {
-        // 1. Calcular Totales desde la Sesion
+        // 1. Calcular Totales desde la Sesion (insensible a mayusculas/minusculas)
         var ingresos = Sesion.Movimientos
-            .Where(m => m.Tipo == "Ingreso")
+            .Where(m => m.Tipo.Equals("Ingreso", StringComparison.OrdinalIgnoreCase))
             .Sum(m => m.Monto);
 
         var gastos = Sesion.Movimientos
-            .Where(m => m.Tipo == "Gasto")
+            .Where(m => m.Tipo.Equals("Gasto", StringComparison.OrdinalIgnoreCase))
             .Sum(m => m.Monto);
 
         var balance = ingresos - gastos;
@@ -51,7 +51,7 @@ public partial class ResumenPage : ContentPage
     }
 }
 
-// Dibujante nativo para el GraphicsView
+// Dibujante nativo para el GraphicsView: Verde = Ingresos / Rojo = Gastos
 public class DonaDrawable : IDrawable
 {
     private readonly float _ingresos;
@@ -59,50 +59,56 @@ public class DonaDrawable : IDrawable
 
     public DonaDrawable(float ingresos, float gastos)
     {
-        _ingresos = ingresos;
-        _gastos = gastos;
+        _ingresos = Math.Max(0, ingresos);
+        _gastos = Math.Max(0, gastos);
     }
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
         float total = _ingresos + _gastos;
 
-        // Si no hay datos registrados, dibuja un anillo gris por defecto
-        if (total <= 0)
-        {
-            float cxGris = dirtyRect.Width / 2;
-            float cyGris = dirtyRect.Height / 2;
-            float radiusGris = Math.Min(cxGris, cyGris) - 10;
-
-            canvas.StrokeSize = 12;
-            canvas.StrokeColor = Color.FromArgb("#2D3042");
-            canvas.DrawArc(cxGris - radiusGris, cyGris - radiusGris, radiusGris * 2, radiusGris * 2, 0, 360, true, false);
-            return;
-        }
-
-        // Cálculo de ángulos proporcionales
-        float anguloIngresos = (_ingresos / total) * 360;
-        float anguloGastos = (_gastos / total) * 360;
-
         float cx = dirtyRect.Width / 2;
         float cy = dirtyRect.Height / 2;
         float radius = Math.Min(cx, cy) - 10;
 
-        canvas.StrokeSize = 12;
+        canvas.StrokeSize = 13;
         canvas.Antialias = true;
 
-        // Dibujar sección de Ingresos (Verde)
-        if (_ingresos > 0)
+        // 1. Si no hay datos registrados: anillo neutro gris
+        if (total <= 0)
         {
-            canvas.StrokeColor = Color.FromArgb("#81C784");
-            canvas.DrawArc(cx - radius, cy - radius, radius * 2, radius * 2, -90, -90 + anguloIngresos, true, false);
+            canvas.StrokeColor = Color.FromArgb("#2D3042");
+            canvas.DrawCircle(cx, cy, radius);
+            return;
         }
 
-        // Dibujar sección de Gastos (Rojo)
-        if (_gastos > 0)
+        // 2. Si solo hay ingresos: 100% Verde
+        if (_gastos <= 0)
+        {
+            canvas.StrokeColor = Color.FromArgb("#81C784");
+            canvas.DrawCircle(cx, cy, radius);
+            return;
+        }
+
+        // 3. Si solo hay gastos: 100% Rojo
+        if (_ingresos <= 0)
         {
             canvas.StrokeColor = Color.FromArgb("#E57373");
-            canvas.DrawArc(cx - radius, cy - radius, radius * 2, radius * 2, -90 + anguloIngresos, -90 + anguloIngresos + anguloGastos, true, false);
+            canvas.DrawCircle(cx, cy, radius);
+            return;
         }
+
+        // 4. Ambos presentes:
+        // Dibujamos la base completa en ROJO (Gastos) con DrawCircle
+        canvas.StrokeColor = Color.FromArgb("#E57373");
+        canvas.DrawCircle(cx, cy, radius);
+
+        // Y encima dibujamos la porción proporcional exacta de INGRESOS en VERDE
+        float proporcionIngresos = _ingresos / total;
+        float anguloIngresos = Math.Clamp(proporcionIngresos * 360f, 1f, 359f);
+
+        canvas.StrokeColor = Color.FromArgb("#81C784");
+        // Dibuja en sentido horario empezando a las 12:00 (-90°)
+        canvas.DrawArc(cx - radius, cy - radius, radius * 2, radius * 2, -90, -90 + anguloIngresos, true, false);
     }
 }

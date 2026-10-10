@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:MovilL.Views.Controls"
              xmlns:views="clr-namespace:MovilL.views"
              x:Class="MovilL.views.NuevoMovimientoPage"
              Title="Nuevo movimiento"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="#12141D">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="ToolbarUsuario"
@@ -14,29 +14,57 @@
                      Clicked="OnUsuarioClicked"/>
     </ContentPage.ToolbarItems>
 
-    <Grid x:Name="MainGrid" RowDefinitions="*, Auto" ColumnDefinitions="*,*">
+    <Grid x:Name="MainGrid" RowDefinitions="*, Auto">
 
-        <!-- Lado izquierdo: Formulario de entrada -->
-        <ScrollView Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="500">
-            <VerticalStackLayout Spacing="15" Padding="20" WidthRequest="390">
+        <!-- Contenido scrolleable responsivo garantizado para pantallas móviles -->
+        <ScrollView Grid.Row="0" Orientation="Vertical" HorizontalScrollBarVisibility="Never">
+            <VerticalStackLayout Spacing="16" HorizontalOptions="Fill" Padding="16, 12">
 
-                <Label Text="FORMULARIO"
-                       FontAttributes="Bold"
-                       FontSize="20"
-                       HorizontalOptions="Center"
-                       TextColor="White"/>
+                <!-- Título y subtítulo -->
+                <VerticalStackLayout Spacing="4" Margin="2, 4, 2, 0" HorizontalOptions="Fill">
+                    <Label Text="Nuevo Movimiento"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                    <Label Text="Registra tus ingresos o gastos con vista previa instantánea"
+                           FontSize="13"
+                           TextColor="#8E95A5"
+                           LineBreakMode="WordWrap"/>
+                </VerticalStackLayout>
 
-                <Border StrokeShape="RoundRectangle 16" 
+                <!-- TARJETA: FORMULARIO -->
+                <Border StrokeShape="RoundRectangle 18" 
                         BackgroundColor="#1A1D29" 
-                        Stroke="#333A4E" 
-                        StrokeThickness="2" 
-                        Padding="25">
-                    <VerticalStackLayout Spacing="15">
+                        Stroke="#2E354A" 
+                        StrokeThickness="1" 
+                        Padding="16"
+                        HorizontalOptions="Fill">
+                    <VerticalStackLayout Spacing="14" HorizontalOptions="Fill">
 
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="14" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 8" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="10,0">
-                                <Picker x:Name="PickerTipo" Title="" FontSize="15" TextColor="White" TitleColor="Gray" SelectedIndexChanged="OnTipoChanged">
+                        <Label Text="DETALLES DE LA OPERACIÓN"
+                               FontAttributes="Bold"
+                               FontSize="11"
+                               TextColor="#81C784"
+                               Margin="2,0"/>
+
+                        <!-- Tipo de movimiento -->
+                        <VerticalStackLayout Spacing="5" HorizontalOptions="Fill">
+                            <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="13" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 10" 
+                                    BackgroundColor="#222738" 
+                                    Stroke="#353D54" 
+                                    StrokeThickness="1" 
+                                    Padding="12,0" 
+                                    HeightRequest="48" 
+                                    MinimumHeightRequest="48"
+                                    HorizontalOptions="Fill">
+                                <Picker x:Name="PickerTipo" 
+                                        FontSize="14" 
+                                        TextColor="White" 
+                                        TitleColor="#8E95A5" 
+                                        HorizontalOptions="Fill" 
+                                        VerticalOptions="Center" 
+                                        SelectedIndexChanged="OnTipoChanged">
                                     <Picker.Items>
                                         <x:String>Ingreso</x:String>
                                         <x:String>Gasto</x:String>
@@ -45,131 +73,178 @@
                             </Border>
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Categoría" FontAttributes="Bold" FontSize="14" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 8" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="10,0">
-                                <Picker x:Name="PickerCategoria"
-                                        Title=""
+                        <!-- Categoría -->
+                        <VerticalStackLayout Spacing="5" HorizontalOptions="Fill">
+                            <Label Text="Categoría" FontAttributes="Bold" FontSize="13" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 10" 
+                                    BackgroundColor="#222738" 
+                                    Stroke="#353D54" 
+                                    StrokeThickness="1" 
+                                    Padding="12,0" 
+                                    HeightRequest="48" 
+                                    MinimumHeightRequest="48"
+                                    HorizontalOptions="Fill">
+                                <Picker x:Name="PickerCategoria"                  
                                         ItemDisplayBinding="{Binding Nombre}"
-                                        FontSize="15"
+                                        FontSize="14"
                                         TextColor="White"
-                                        TitleColor="Gray"
+                                        TitleColor="#8E95A5"
+                                        HorizontalOptions="Fill"
+                                        VerticalOptions="Center"
                                         SelectedIndexChanged="OnFormularioChanged"/>
                             </Border>
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Monto" FontAttributes="Bold" FontSize="14" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 8" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="10,2">
+                        <!-- Monto -->
+                        <VerticalStackLayout Spacing="5" HorizontalOptions="Fill">
+                            <Label Text="Monto ($)" FontAttributes="Bold" FontSize="13" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 10" 
+                                    BackgroundColor="#222738" 
+                                    Stroke="#353D54" 
+                                    StrokeThickness="1" 
+                                    Padding="12,0" 
+                                    HeightRequest="48" 
+                                    MinimumHeightRequest="48"
+                                    HorizontalOptions="Fill">
                                 <Entry x:Name="EntryMonto"
-                                       Placeholder="0.00$"
-                                       PlaceholderColor="Gray"
+                                       Placeholder="0.00"
+                                       PlaceholderColor="#6E768E"
                                        TextColor="White"
                                        Keyboard="Numeric"
                                        FontSize="15"
+                                       HorizontalOptions="Fill"
+                                       VerticalOptions="Center"
                                        TextChanged="OnFormularioChanged"/>
                             </Border>
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Fecha" FontAttributes="Bold" FontSize="14" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 8" BackgroundColor="#25293A" Stroke="#3A405A" StrokeThickness="1" Padding="10,2">
+                        <!-- Fecha -->
+                        <VerticalStackLayout Spacing="5" HorizontalOptions="Fill">
+                            <Label Text="Fecha" FontAttributes="Bold" FontSize="13" TextColor="#B0B5C6"/>
+                            <Border StrokeShape="RoundRectangle 10" 
+                                    BackgroundColor="#222738" 
+                                    Stroke="#353D54" 
+                                    StrokeThickness="1" 
+                                    Padding="12,0" 
+                                    HeightRequest="48" 
+                                    MinimumHeightRequest="48"
+                                    HorizontalOptions="Fill">
                                 <DatePicker x:Name="DatePickerFecha"
                                             TextColor="White"
-                                            FontSize="15"
+                                            FontSize="14"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Center"
                                             DateSelected="OnFormularioChanged"/>
                             </Border>
                         </VerticalStackLayout>
 
+                        <!-- Mensaje de estado -->
                         <Label x:Name="LabelMensaje"
                                TextColor="#4CAF50"
                                FontSize="13"
                                FontAttributes="Bold"
                                IsVisible="False"
-                               HorizontalOptions="Center"
-                               HorizontalTextAlignment="Center"/>
+                               HorizontalOptions="Fill"
+                               HorizontalTextAlignment="Center"
+                               LineBreakMode="WordWrap"
+                               Margin="0, 4, 0, 0"/>
                     </VerticalStackLayout>
                 </Border>
 
-            </VerticalStackLayout>
-        </ScrollView>
-
-        <!-- Lado derecho: PREVIEW Y BOTÓN GUARDAR -->
-        <ScrollView Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" MaximumWidthRequest="450">
-            <VerticalStackLayout Spacing="15" Padding="20" WidthRequest="380">
-
-                <Label Text="RESUMEN" FontAttributes="Bold" FontSize="20" HorizontalOptions="Center" TextColor="White"/>
-
-                <Border StrokeShape="RoundRectangle 16" 
+                <!-- TARJETA: VISTA PREVIA Y CONFIRMACIÓN -->
+                <Border StrokeShape="RoundRectangle 18" 
                         BackgroundColor="#1A1D29" 
-                        Stroke="#333A4E" 
-                        StrokeThickness="2" 
-                        Padding="25">
-                    <VerticalStackLayout Spacing="18" HorizontalOptions="Center">
+                        Stroke="#2E354A" 
+                        StrokeThickness="1" 
+                        Padding="16"
+                        HorizontalOptions="Fill">
+                    <VerticalStackLayout Spacing="16" HorizontalOptions="Fill">
 
-                        <!-- Tipo de movimiento -->
-                        <Label x:Name="LabelPreviewTipo" 
-                               Text="INGRESO" 
-                               FontAttributes="Bold" 
-                               FontSize="22" 
-                               HorizontalOptions="Center" 
-                               TextColor="#4CAF50"/>
+                        <Grid ColumnDefinitions="*, Auto" HorizontalOptions="Fill">
+                            <Label Text="VISTA PREVIA EN VIVO"
+                                   FontAttributes="Bold"
+                                   FontSize="11"
+                                   TextColor="#8E95A5"
+                                   VerticalOptions="Center"/>
+                            <Label x:Name="LabelPreviewTipo" 
+                                   Grid.Column="1"
+                                   Text="INGRESO" 
+                                   FontAttributes="Bold" 
+                                   FontSize="13" 
+                                   TextColor="#4CAF50"
+                                   HorizontalOptions="End"
+                                   HorizontalTextAlignment="End"
+                                   VerticalOptions="Center"/>
+                        </Grid>
 
-                        <!-- Cuadro con la Imagen ocupando todo el espacio del Border -->
+                        <!-- Cuadro con la Imagen ocupando todo el ancho de forma responsiva -->
                         <Border x:Name="BorderIcono" 
-                                StrokeShape="RoundRectangle 16" 
-                                BackgroundColor="#25293A" 
-                                Stroke="#4CAF50"
+                                StrokeShape="RoundRectangle 14" 
+                                BackgroundColor="#222738" 
+                                Stroke="#4CAF50" 
                                 StrokeThickness="2" 
-                                HeightRequest="160" 
-                                WidthRequest="260" 
-                                HorizontalOptions="Center"
+                                HeightRequest="140"
+                                MinimumHeightRequest="140"
+                                MaximumHeightRequest="140"
+                                HorizontalOptions="Fill"
                                 Padding="0">
-                            <Grid>
-                                <!-- Imagen ocupando todo el espacio del Border -->
+                            <Grid HeightRequest="140" HorizontalOptions="Fill" IsClippedToBounds="True">
                                 <Image x:Name="ImagePreviewCategoria"
                                        Aspect="AspectFill"
+                                       HeightRequest="140"
                                        HorizontalOptions="Fill"
                                        VerticalOptions="Fill"/>
 
-                                <!-- Barra inferior elegante con el nombre de la categoría -->
+                                <!-- Barra inferior con el nombre de la categoría -->
                                 <Border VerticalOptions="End"
-                                        BackgroundColor="#D9161824"
+                                        BackgroundColor="#E6161924"
                                         StrokeThickness="0"
-                                        StrokeShape="RoundRectangle 0,0,14,14"
-                                        Padding="10,8">
+                                        StrokeShape="RoundRectangle 0,0,12,12"
+                                        Padding="12,6"
+                                        HorizontalOptions="Fill">
                                     <Label x:Name="LabelPreviewCategoria"
                                            Text="Sin categoría"
-                                           FontSize="15"
+                                           FontSize="14"
                                            FontAttributes="Bold"
                                            TextColor="White"
-                                           HorizontalOptions="Center"/>
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           LineBreakMode="TailTruncation"/>
                                 </Border>
                             </Grid>
                         </Border>
 
-                        <!-- Datos: Monto y Fecha -->
-                        <VerticalStackLayout Spacing="8" HorizontalOptions="Fill">
-                            <Grid ColumnDefinitions="Auto, *">
-                                <Label Text="monto:" FontAttributes="Bold" TextColor="Gray" FontSize="16"/>
-                                <Label x:Name="LabelPreviewMonto" Grid.Column="1" Text="$ 0,00" FontAttributes="Bold" FontSize="18" HorizontalOptions="End" TextColor="White"/>
-                            </Grid>
+                        <!-- Resumen dinámico: Monto y Fecha en formato fila limpia -->
+                        <Border BackgroundColor="#222738"
+                                Stroke="#323A50"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                Padding="14, 10"
+                                HorizontalOptions="Fill">
+                            <VerticalStackLayout Spacing="8" HorizontalOptions="Fill">
+                                <Grid ColumnDefinitions="Auto, *" HorizontalOptions="Fill">
+                                    <Label Text="Monto total:" FontAttributes="Bold" TextColor="#8E95A5" FontSize="14" VerticalOptions="Center"/>
+                                    <Label x:Name="LabelPreviewMonto" Grid.Column="1" Text="$ 0,00" FontAttributes="Bold" FontSize="17" TextColor="White" HorizontalOptions="End" HorizontalTextAlignment="End" LineBreakMode="NoWrap" VerticalOptions="Center"/>
+                                </Grid>
+                                <BoxView HeightRequest="1" Color="#30384C" HorizontalOptions="Fill"/>
+                                <Grid ColumnDefinitions="Auto, *" HorizontalOptions="Fill">
+                                    <Label Text="Fecha de registro:" FontAttributes="Bold" TextColor="#8E95A5" FontSize="13" VerticalOptions="Center"/>
+                                    <Label x:Name="LabelPreviewFecha" Grid.Column="1" Text="--/--/----" FontSize="13" TextColor="#B0B5C6" HorizontalOptions="End" HorizontalTextAlignment="End" LineBreakMode="NoWrap" VerticalOptions="Center"/>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
 
-                            <Grid ColumnDefinitions="Auto, *">
-                                <Label Text="fecha:" FontAttributes="Bold" TextColor="Gray" FontSize="16"/>
-                                <Label x:Name="LabelPreviewFecha" Grid.Column="1" Text="--/--/----" FontSize="15" HorizontalOptions="End" TextColor="White"/>
-                            </Grid>
-                        </VerticalStackLayout>
-
-                        <!-- Único botón de Guardar (Dinámico) -->
+                        <!-- Botón Guardar Responsivo y Grande -->
                         <Button x:Name="BtnGuardar"
                                 Text="Guardar ingreso" 
                                 Clicked="OnGuardarClicked" 
                                 BackgroundColor="#4CAF50" 
                                 TextColor="White" 
                                 FontAttributes="Bold"
-                                CornerRadius="8"
-                                Margin="0,10,0,0"/>
+                                FontSize="15"
+                                HeightRequest="50"
+                                CornerRadius="12"
+                                HorizontalOptions="Fill"/>
 
                     </VerticalStackLayout>
                 </Border>
@@ -178,10 +253,10 @@
         </ScrollView>
 
         <!-- Barra de navegación inferior -->
-        <views:Navegador Grid.Row="1" Grid.ColumnSpan="2" PaginaActiva="Movimiento"/>
+        <views:Navegador Grid.Row="1" PaginaActiva="Movimiento"/>
 
-        <!-- Menú lateral de usuario -->
-        <views:Menu x:Name="MenuUsuario" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <!-- Menú lateral de usuario flotante -->
+        <views:Menu x:Name="MenuUsuario" Grid.RowSpan="2"/>
 
     </Grid>
 </ContentPage>
