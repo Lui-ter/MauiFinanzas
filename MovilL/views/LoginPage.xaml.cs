@@ -1,11 +1,15 @@
 using MovilL.Models;
+using MovilL.Services;
 
 namespace MovilL.views;
 
 public partial class LoginPage : ContentPage
 {
-    public LoginPage()
+    private readonly IMovilDatabaseService _databaseService;
+
+    public LoginPage(IMovilDatabaseService databaseService)
     {
+        _databaseService = databaseService;
         InitializeComponent();
     }
 
@@ -14,10 +18,22 @@ public partial class LoginPage : ContentPage
         string userText = EntryUsuario.Text?.Trim() ?? string.Empty;
         string passText = EntryContrasena.Text?.Trim() ?? string.Empty;
 
-        var usuario = Usuario.ValidarCredenciales(userText, passText);
+        Usuario? usuario;
+        try
+        {
+            usuario = await _databaseService.GetUsuarioPorCredencialesAsync(userText, passText);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"No se pudo consultar el usuario: {ex.Message}");
+            LabelError.Text = "No se pudo validar la cuenta. Inténtalo de nuevo.";
+            LabelError.IsVisible = true;
+            return;
+        }
 
         if (usuario != null)
         {
+            Usuario.ActualizarUsuario(usuario);
             Sesion.CerrarSesion();
             Sesion.EstaLogueado = true;
             Sesion.EsInvitado = false;
@@ -29,6 +45,7 @@ public partial class LoginPage : ContentPage
         }
         else
         {
+            LabelError.Text = "Usuario o contraseña incorrectos";
             LabelError.IsVisible = true;
         }
     }

@@ -34,8 +34,8 @@ public class Categoria
         new Categoria(6, "Estudio", "estudio.jpg", "Gasto"),
 
         // Ingresos
-        new Categoria(1, "Inversion", "inversion.jpg", "Ingreso"),
-        new Categoria(1, "Negocio", "negocio.jpg", "Ingreso"),
+        new Categoria(7, "Inversion", "inversion.jpg", "Ingreso"),
+        new Categoria(8, "Negocio", "negocio.jpg", "Ingreso"),
     };
 }
 

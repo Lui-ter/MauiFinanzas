@@ -1,11 +1,15 @@
 using MovilL.Models;
+using MovilL.Services;
 
 namespace MovilL.views;
 
 public partial class Perfil : ContentPage
 {
-    public Perfil()
+    private readonly IMovilDatabaseService _databaseService;
+
+    public Perfil(IMovilDatabaseService databaseService)
     {
+        _databaseService = databaseService;
         InitializeComponent();
     }
 
@@ -95,7 +99,7 @@ public partial class Perfil : ContentPage
         }
 
         int idActual = Sesion.UsuarioActual?.Id ?? 0;
-        if (Usuario.ExisteNombreUsuario(username, idActual))
+        if (await _databaseService.ExisteNombreUsuarioAsync(username, idActual))
         {
             await MostrarMensaje($"El usuario '@{username}' ya está en uso. Elige otro.", false);
             return;
@@ -110,24 +114,37 @@ public partial class Perfil : ContentPage
 
         if (Sesion.UsuarioActual != null)
         {
-            // 1. Actualizar instancia de sesión
-            Sesion.UsuarioActual.Nombre = nombre;
-            Sesion.UsuarioActual.NombreUsuario = username;
-            Sesion.UsuarioActual.Correo = correo;
-            Sesion.UsuarioActual.Edad = edad;
-            Sesion.UsuarioActual.Contrasena = contrasena;
+            var usuarioActualizado = new Usuario
+            {
+                Id = Sesion.UsuarioActual.Id,
+                Nombre = nombre,
+                NombreUsuario = username,
+                Correo = correo,
+                Edad = edad,
+                Contrasena = contrasena,
+                Imagen = Sesion.UsuarioActual.Imagen
+            };
 
-            // 2. Reflejar en el modelo central Usuario.ListaUsuarios
-            Usuario.ActualizarUsuario(Sesion.UsuarioActual);
+            try
+            {
+                await _databaseService.GuardarUsuarioAsync(usuarioActualizado);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"No se pudo guardar el perfil en SQLite: {ex.Message}");
+                await MostrarMensaje("No se pudieron guardar los cambios en SQLite.", false);
+                return;
+            }
 
+            Usuario.ActualizarUsuario(usuarioActualizado);
+            Sesion.UsuarioActual = usuarioActualizado;
             Sesion.NombreUsuario = nombre;
 
-            // 3. Actualizar vistas
             LblNombreHeader.Text = nombre;
             LblUsernameHeader.Text = "@" + username;
             MenuUsuario.CargarUsuario();
 
-            await MostrarMensaje("¡Datos modificados y guardados en el modelo correctamente!", true);
+            await MostrarMensaje("Cambios guardados correctamente en SQLite.", true);
         }
     }
 
@@ -145,7 +162,7 @@ public partial class Perfil : ContentPage
             return;
         }
 
-        if (Usuario.ExisteNombreUsuario(username))
+        if (await _databaseService.ExisteNombreUsuarioAsync(username))
         {
             await MostrarMensaje($"El usuario '@{username}' ya está registrado. Elige otro.", false);
             return;
@@ -155,6 +172,7 @@ public partial class Perfil : ContentPage
 
         var nuevoUsuario = new Usuario
         {
+            Id = 0,
             Nombre = nombre,
             NombreUsuario = username,
             Correo = correo,
@@ -163,7 +181,17 @@ public partial class Perfil : ContentPage
             Imagen = "user.png"
         };
 
-        // Guardar en la lista del modelo
+        try
+        {
+            await _databaseService.GuardarUsuarioAsync(nuevoUsuario);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"No se pudo registrar el usuario en SQLite: {ex.Message}");
+            await MostrarMensaje("No se pudo guardar la cuenta en SQLite.", false);
+            return;
+        }
+
         Usuario.ActualizarUsuario(nuevoUsuario);
 
         Sesion.EsInvitado = false;
@@ -196,6 +224,7 @@ public partial class Perfil : ContentPage
             if (Sesion.UsuarioActual != null && Sesion.UsuarioActual.Id > 0)
             {
                 Usuario.EliminarUsuario(Sesion.UsuarioActual.Id);
+                await _databaseService.EliminarUsuarioAsync(Sesion.UsuarioActual.Id);
             }
 
             Sesion.CerrarSesion();

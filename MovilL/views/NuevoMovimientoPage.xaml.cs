@@ -1,13 +1,27 @@
 using MovilL.Models;
+using MovilL.Services;
 
 namespace MovilL.views;
 
 public partial class NuevoMovimientoPage : ContentPage
 {
+    private readonly IMovilDatabaseService? _databaseService;
+
+    public NuevoMovimientoPage(IMovilDatabaseService databaseService)
+    {
+        _databaseService = databaseService;
+        InitializeComponent();
+        Initialize();
+    }
+
     public NuevoMovimientoPage()
     {
         InitializeComponent();
+        Initialize();
+    }
 
+    private void Initialize()
+    {
         // Configuración inicial de la vista
         DatePickerFecha.Date = DateTime.Today;
         PickerTipo.SelectedIndex = 0; // Inicia seleccionado en "Ingreso" por defecto
@@ -20,6 +34,25 @@ public partial class NuevoMovimientoPage : ContentPage
         base.OnAppearing();
         MenuUsuario.CargarUsuario();
         ToolbarUsuario.IconImageSource = Sesion.UsuarioActual?.Imagen ?? "user.png";
+        _ = CargarMovimientosAsync();
+    }
+
+    private async Task CargarMovimientosAsync()
+    {
+        if (_databaseService == null)
+            return;
+
+        try
+        {
+            var movimientos = await _databaseService.GetMovimientosAsync(Sesion.UsuarioActual?.Id ?? 0);
+            Sesion.Movimientos.Clear();
+            foreach (var movimiento in movimientos)
+                Sesion.Movimientos.Add(movimiento);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"No se pudieron cargar los movimientos: {ex.Message}");
+        }
     }
 
     private async void OnUsuarioClicked(object? sender, EventArgs e)
@@ -129,7 +162,7 @@ public partial class NuevoMovimientoPage : ContentPage
     }
 
     // Lógica del botón de guardado alojado en la Preview
-    private void OnGuardarClicked(object? sender, EventArgs e)
+    private async void OnGuardarClicked(object? sender, EventArgs e)
     {
         var categoriaSeleccionada = PickerCategoria.SelectedItem as Categoria;
 
@@ -143,6 +176,7 @@ public partial class NuevoMovimientoPage : ContentPage
 
         var nuevo = new Movimiento
         {
+            UsuarioId = Sesion.UsuarioActual?.Id ?? 0,
             Tipo = PickerTipo.SelectedItem.ToString() ?? "Ingreso",
             Categoria = categoriaSeleccionada.Nombre,
             Monto = decimal.TryParse(EntryMonto.Text, out var monto) ? monto : 0,
@@ -150,6 +184,22 @@ public partial class NuevoMovimientoPage : ContentPage
         };
 
         Sesion.Movimientos.Add(nuevo);
+
+        if (_databaseService != null)
+        {
+            try
+            {
+                await _databaseService.GuardarMovimientoAsync(nuevo);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"No se pudo persistir el movimiento: {ex.Message}");
+                LabelMensaje.TextColor = Colors.Red;
+                LabelMensaje.Text = "El movimiento se agregó a la sesión, pero no pudo guardarse en SQLite.";
+                LabelMensaje.IsVisible = true;
+                return;
+            }
+        }
 
         LabelMensaje.TextColor = Colors.Green;
         LabelMensaje.Text = Sesion.EsInvitado
