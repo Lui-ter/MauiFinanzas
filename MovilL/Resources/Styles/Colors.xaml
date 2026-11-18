@@ -5,12 +5,27 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
-    <Color x:Key="PrimaryDarkText">#242424</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="SecondaryDarkText">#9880e5</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="Primary">#49CE8D</Color>
+    <Color x:Key="PrimaryDark">#68E0A3</Color>
+    <Color x:Key="PrimaryDarkText">#0B2018</Color>
+    <Color x:Key="Secondary">#173C32</Color>
+    <Color x:Key="SecondaryDarkText">#A6B1C5</Color>
+    <Color x:Key="Tertiary">#25294A</Color>
+
+    <Color x:Key="AppBackground">#0B1020</Color>
+    <Color x:Key="AppSurface">#141B2B</Color>
+    <Color x:Key="AppSurfaceRaised">#192338</Color>
+    <Color x:Key="AppInputBackground">#0E1524</Color>
+    <Color x:Key="AppStroke">#28334B</Color>
+    <Color x:Key="AppInputStroke">#303B53</Color>
+    <Color x:Key="AppTextSecondary">#A6B1C5</Color>
+    <Color x:Key="AppTextMuted">#8491A7</Color>
+    <Color x:Key="AppAccent">#49CE8D</Color>
+    <Color x:Key="AppAccentLight">#68E0A3</Color>
+    <Color x:Key="AppAccentSoft">#173C32</Color>
+    <Color x:Key="AppDanger">#FF8585</Color>
+    <Color x:Key="AppDangerSoft">#3B2532</Color>
+    <Color x:Key="AppInfo">#8CC8FF</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>

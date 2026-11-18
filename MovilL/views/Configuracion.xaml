@@ -5,7 +5,7 @@
              x:Class="MovilL.views.Configuracion"
              Title="Configuración"
              Shell.TabBarIsVisible="False"
-             BackgroundColor="#12141D">
+             BackgroundColor="#0B1020">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="ToolbarUsuario"
@@ -20,8 +20,8 @@
             <VerticalStackLayout Padding="24" Spacing="24" MaximumWidthRequest="720" HorizontalOptions="Center">
 
                 <!-- PREFERENCIAS GENERALES -->
-                <Border BackgroundColor="#1A1D29"
-                        Stroke="#2F364C"
+                <Border BackgroundColor="#141B2B"
+                        Stroke="#28334B"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 22"
                         Padding="26">
@@ -30,19 +30,19 @@
                         <Label Text="PREFERENCIAS DE APLICACIÓN"
                                FontSize="14"
                                FontAttributes="Bold"
-                               TextColor="#81C784"/>
+                               TextColor="#68E0A3"/>
 
                         <!-- Moneda Principal -->
                         <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
                             <VerticalStackLayout Spacing="3" VerticalOptions="Center">
                                 <Label Text="Moneda principal" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Moneda para el formato de balances" FontSize="13" TextColor="#8E95A5"/>
+                                <Label Text="Moneda para el formato de balances" FontSize="13" TextColor="#8491A7"/>
                             </VerticalStackLayout>
 
                             <Border Grid.Column="1"
                                     StrokeShape="RoundRectangle 10"
-                                    BackgroundColor="#25293A"
-                                    Stroke="#3A405A"
+                                    BackgroundColor="#192338"
+                                    Stroke="#303B53"
                                     StrokeThickness="1"
                                     Padding="14, 0"
                                     WidthRequest="130"
@@ -58,34 +58,34 @@
                             </Border>
                         </Grid>
 
-                        <BoxView HeightRequest="1" Color="#2A3043"/>
+                        <BoxView HeightRequest="1" Color="#28334B"/>
 
                         <!-- Confirmar antes de guardar -->
                         <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
                             <VerticalStackLayout Spacing="3" VerticalOptions="Center">
                                 <Label Text="Confirmar movimientos" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Preguntar antes de registrar transacciones" FontSize="13" TextColor="#8E95A5"/>
+                                <Label Text="Preguntar antes de registrar transacciones" FontSize="13" TextColor="#8491A7"/>
                             </VerticalStackLayout>
-                            <Switch Grid.Column="1" x:Name="SwitchConfirmar" IsToggled="True" OnColor="#4CAF50"/>
+                            <Switch Grid.Column="1" x:Name="SwitchConfirmar" IsToggled="True" OnColor="#49CE8D"/>
                         </Grid>
 
-                        <BoxView HeightRequest="1" Color="#2A3043"/>
+                        <BoxView HeightRequest="1" Color="#28334B"/>
 
                         <!-- Notificaciones -->
                         <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
                             <VerticalStackLayout Spacing="3" VerticalOptions="Center">
                                 <Label Text="Recordatorios diarios" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Recibir aviso para registrar gastos del día" FontSize="13" TextColor="#8E95A5"/>
+                                <Label Text="Recibir aviso para registrar gastos del día" FontSize="13" TextColor="#8491A7"/>
                             </VerticalStackLayout>
-                            <Switch Grid.Column="1" x:Name="SwitchNotificaciones" IsToggled="True" OnColor="#4CAF50"/>
+                            <Switch Grid.Column="1" x:Name="SwitchNotificaciones" IsToggled="True" OnColor="#49CE8D"/>
                         </Grid>
 
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- SEGURIDAD -->
-                <Border BackgroundColor="#1A1D29"
-                        Stroke="#2F364C"
+                <Border BackgroundColor="#141B2B"
+                        Stroke="#28334B"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 22"
                         Padding="26">
@@ -94,34 +94,34 @@
                         <Label Text="SEGURIDAD Y PRIVACIDAD"
                                FontSize="14"
                                FontAttributes="Bold"
-                               TextColor="#81C784"/>
+                               TextColor="#68E0A3"/>
 
                         <!-- Bloqueo biométrico/PIN -->
                         <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
                             <VerticalStackLayout Spacing="3" VerticalOptions="Center">
                                 <Label Text="Bloqueo al salir" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Solicitar clave al reanudar la app" FontSize="13" TextColor="#8E95A5"/>
+                                <Label Text="Solicitar clave al reanudar la app" FontSize="13" TextColor="#8491A7"/>
                             </VerticalStackLayout>
-                            <Switch Grid.Column="1" x:Name="SwitchBloqueo" IsToggled="False" OnColor="#4CAF50"/>
+                            <Switch Grid.Column="1" x:Name="SwitchBloqueo" IsToggled="False" OnColor="#49CE8D"/>
                         </Grid>
 
-                        <BoxView HeightRequest="1" Color="#2A3043"/>
+                        <BoxView HeightRequest="1" Color="#28334B"/>
 
                         <!-- Modo Oscuro -->
                         <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
                             <VerticalStackLayout Spacing="3" VerticalOptions="Center">
                                 <Label Text="Tema Oscuro" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Paleta de alto contraste y descanso visual" FontSize="13" TextColor="#8E95A5"/>
+                                <Label Text="Paleta de alto contraste y descanso visual" FontSize="13" TextColor="#8491A7"/>
                             </VerticalStackLayout>
-                            <Switch Grid.Column="1" x:Name="SwitchModoOscuro" IsToggled="True" OnColor="#4CAF50" IsEnabled="False"/>
+                            <Switch Grid.Column="1" x:Name="SwitchModoOscuro" IsToggled="True" OnColor="#49CE8D" IsEnabled="False"/>
                         </Grid>
 
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- ACERCA DE -->
-                <Border BackgroundColor="#1A1D29"
-                        Stroke="#2F364C"
+                <Border BackgroundColor="#141B2B"
+                        Stroke="#28334B"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 22"
                         Padding="26">
@@ -129,20 +129,20 @@
                         <Label Text="ACERCA DE LA APLICACIÓN"
                                FontSize="14"
                                FontAttributes="Bold"
-                               TextColor="#81C784"/>
+                               TextColor="#68E0A3"/>
                         <Label Text="MovilL - Gestor Financiero Personal" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                        <Label Text="Versión 1.0.0" FontSize="13" TextColor="#8E95A5"/>
+                        <Label Text="Versión 1.0.0" FontSize="13" TextColor="#8491A7"/>
                         <Label Text="Plataforma desarrollada en .NET MAUI para el seguimiento y control ágil de gastos e ingresos."
                                FontSize="13"
-                               TextColor="#B0B5C6"
+                               TextColor="#A6B1C5"
                                LineHeight="1.3"/>
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- BOTÓN GUARDAR -->
                 <Button Text="Guardar Ajustes"
-                        BackgroundColor="#4CAF50"
-                        TextColor="White"
+                        BackgroundColor="#49CE8D"
+                        TextColor="#0B2018"
                         FontAttributes="Bold"
                         FontSize="16"
                         CornerRadius="12"

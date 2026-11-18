@@ -30,16 +30,16 @@ public partial class Menu : ContentView
             if (Sesion.EsInvitado)
             {
                 LblRolUsuarioMenu.Text = "Modo Invitado";
-                BadgeRol.BackgroundColor = Color.FromArgb("#3C3322");
-                BadgeRol.Stroke = Color.FromArgb("#705C3D");
-                LblRolUsuarioMenu.TextColor = Color.FromArgb("#FFCA28");
+                BadgeRol.BackgroundColor = Color.FromArgb("#352A1E");
+                BadgeRol.Stroke = Color.FromArgb("#72542A");
+                LblRolUsuarioMenu.TextColor = Color.FromArgb("#FFC66D");
             }
             else
             {
                 LblRolUsuarioMenu.Text = "Cuenta Principal";
-                BadgeRol.BackgroundColor = Color.FromArgb("#223C2D");
-                BadgeRol.Stroke = Color.FromArgb("#3D704E");
-                LblRolUsuarioMenu.TextColor = Color.FromArgb("#81C784");
+                BadgeRol.BackgroundColor = Color.FromArgb("#173C32");
+                BadgeRol.Stroke = Color.FromArgb("#316D53");
+                LblRolUsuarioMenu.TextColor = Color.FromArgb("#68E0A3");
             }
         }
         else

@@ -24,8 +24,8 @@
                 VerticalOptions="Fill"
                 WidthRequest="300"
                 MaximumWidthRequest="320"
-                BackgroundColor="#181B26"
-                Stroke="#2A3043"
+                BackgroundColor="#141B2B"
+                Stroke="#28334B"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 24, 0, 0, 24"
                 Padding="0"
@@ -43,7 +43,7 @@
                     <Button Grid.Column="1"
                             Text="✕"
                             FontSize="16"
-                            TextColor="#9E9E9E"
+                            TextColor="#8491A7"
                             BackgroundColor="Transparent"
                             BorderWidth="0"
                             WidthRequest="40"
@@ -57,19 +57,19 @@
                     <VerticalStackLayout Spacing="22">
 
                         <!-- TARJETA DE PERFIL DEL USUARIO -->
-                        <Border BackgroundColor="#212638"
-                                Stroke="#323A52"
+                        <Border BackgroundColor="#192338"
+                                Stroke="#28334B"
                                 StrokeThickness="1"
                                 StrokeShape="RoundRectangle 18"
                                 Padding="16">
                             <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
-                                
+
                                 <Border WidthRequest="84"
                                         HeightRequest="84"
                                         StrokeShape="RoundRectangle 42"
-                                        Stroke="#4CAF50"
+                                        Stroke="#49CE8D"
                                         StrokeThickness="2.5"
-                                        BackgroundColor="#2A3043"
+                                        BackgroundColor="#28334B"
                                         Padding="0"
                                         HorizontalOptions="Center">
                                     <Image x:Name="ImgUsuarioMenu"
@@ -88,14 +88,14 @@
                                     <Label x:Name="LblCorreoUsuarioMenu"
                                            Text="correo@ejemplo.com"
                                            FontSize="13"
-                                           TextColor="#8E95A5"
+                                           TextColor="#8491A7"
                                            HorizontalOptions="Center"/>
                                 </VerticalStackLayout>
 
                                 <!-- Badge de rol/estado -->
                                 <Border x:Name="BadgeRol"
-                                        BackgroundColor="#223C2D"
-                                        Stroke="#3D704E"
+                                        BackgroundColor="#173C32"
+                                        Stroke="#316D53"
                                         StrokeThickness="1"
                                         StrokeShape="RoundRectangle 12"
                                         Padding="10, 4"
@@ -104,7 +104,7 @@
                                            Text="Sesión Activa"
                                            FontSize="11"
                                            FontAttributes="Bold"
-                                           TextColor="#81C784"/>
+                                           TextColor="#68E0A3"/>
                                 </Border>
                             </VerticalStackLayout>
                         </Border>
@@ -114,12 +114,12 @@
                             <Label Text="GESTIÓN Y AJUSTES"
                                    FontSize="11"
                                    FontAttributes="Bold"
-                                   TextColor="#8E95A5"
+                                   TextColor="#8491A7"
                                    Margin="4, 0"/>
 
                             <!-- Opción 1: Perfil -->
-                            <Border BackgroundColor="#212638"
-                                    Stroke="#2E354A"
+                            <Border BackgroundColor="#192338"
+                                    Stroke="#28334B"
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 14"
                                     Padding="14, 12">
@@ -132,20 +132,20 @@
                                             HeightRequest="38"
                                             StrokeShape="RoundRectangle 19"
                                             Stroke="Transparent"
-                                            BackgroundColor="#2E3C2B">
+                                            BackgroundColor="#173C32">
                                         <Label Text="👤" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
                                     </Border>
                                     <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                                         <Label Text="Mi Perfil" FontAttributes="Bold" FontSize="15" TextColor="White"/>
-                                        <Label Text="Ver y gestionar información personal" FontSize="12" TextColor="#8E95A5"/>
+                                        <Label Text="Ver y gestionar información personal" FontSize="12" TextColor="#8491A7"/>
                                     </VerticalStackLayout>
-                                    <Label Grid.Column="2" Text="➔" FontSize="14" TextColor="#8E95A5" VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Text="➔" FontSize="14" TextColor="#8491A7" VerticalOptions="Center"/>
                                 </Grid>
                             </Border>
 
                             <!-- Opción 2: Configuración -->
-                            <Border BackgroundColor="#212638"
-                                    Stroke="#2E354A"
+                            <Border BackgroundColor="#192338"
+                                    Stroke="#28334B"
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 14"
                                     Padding="14, 12">
@@ -158,14 +158,14 @@
                                             HeightRequest="38"
                                             StrokeShape="RoundRectangle 19"
                                             Stroke="Transparent"
-                                            BackgroundColor="#243444">
+                                            BackgroundColor="#1B2A3F">
                                         <Label Text="⚙️" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"/>
                                     </Border>
                                     <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                                         <Label Text="Configuración" FontAttributes="Bold" FontSize="15" TextColor="White"/>
-                                        <Label Text="Moneda, notificaciones y seguridad" FontSize="12" TextColor="#8E95A5"/>
+                                        <Label Text="Moneda, notificaciones y seguridad" FontSize="12" TextColor="#8491A7"/>
                                     </VerticalStackLayout>
-                                    <Label Grid.Column="2" Text="➔" FontSize="14" TextColor="#8E95A5" VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Text="➔" FontSize="14" TextColor="#8491A7" VerticalOptions="Center"/>
                                 </Grid>
                             </Border>
                         </VerticalStackLayout>
@@ -175,12 +175,12 @@
 
                 <!-- BOTÓN CERRAR SESIÓN EN EL PIE -->
                 <Border Grid.Row="2"
-                        BackgroundColor="#181B26"
-                        Stroke="#2A3043"
+                        BackgroundColor="#141B2B"
+                        Stroke="#28334B"
                         StrokeThickness="1"
                         Padding="20, 15">
-                    <Button Text="Cerrar sesión"                       
-                            BackgroundColor="#D32F2F"
+                    <Button Text="Cerrar sesión"
+                            BackgroundColor="#B74756"
                             TextColor="White"
                             FontAttributes="Bold"
                             FontSize="14"

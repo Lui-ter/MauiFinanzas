@@ -5,7 +5,7 @@
              x:Class="MovilL.views.ResumenPage"
              Title="Resumen"
              Shell.TabBarIsVisible="False"
-             BackgroundColor="#12141D">
+             BackgroundColor="#0B1020">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="ToolbarUsuario"
@@ -27,65 +27,127 @@
                            TextColor="White"/>
                     <Label Text="Estado de tu balance y registro de movimientos"
                            FontSize="13"
-                           TextColor="#8E95A5"/>
+                           TextColor="#8491A7"/>
                 </VerticalStackLayout>
 
-                <!-- TARJETA PRINCIPAL: BALANCE GENERAL -->
-                <Border BackgroundColor="#1A1D29"
-                        Stroke="#2E354A"
-                        StrokeThickness="1"
-                        StrokeShape="RoundRectangle 18"
-                        Padding="18">
-                    <VerticalStackLayout Spacing="16">
-
-                        <!-- Balance Actual Hero -->
-                        <VerticalStackLayout Spacing="4">
+                <Border StrokeThickness="0"
+                        StrokeShape="RoundRectangle 26"
+                        Padding="24">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#1D654A" Offset="0"/>
+                            <GradientStop Color="#173C32" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid ColumnDefinitions="*, Auto"
+                          RowDefinitions="Auto, Auto"
+                          RowSpacing="10">
+                        <VerticalStackLayout Spacing="7">
                             <Label Text="BALANCE ACTUAL"
                                    FontSize="11"
+                                   CharacterSpacing="1.5"
                                    FontAttributes="Bold"
-                                   TextColor="#90CAF9"/>
+                                   TextColor="#C5F4DC"/>
                             <Label x:Name="LabelBalance"
                                    Text="$0.00"
-                                   FontSize="30"
+                                   FontSize="38"
                                    FontAttributes="Bold"
-                                   TextColor="White"/>
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"/>
                         </VerticalStackLayout>
-
-                        <!-- Fila con Ingresos y Gastos E57373  -->
-                        <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
-                            <!-- Tarjeta Ingresos -->
-                            <Border Grid.Column="0"
-                                    BackgroundColor="#4E272E"
-                                    Stroke="#4E272E"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 14"
-                                    Padding="14, 12">
-                                <VerticalStackLayout Spacing="4">
-                                    <Label Text="↑ Ingresos" FontSize="12" FontAttributes="Bold" TextColor="#E57373"/>
-                                    <Label x:Name="LabelIngresos" Text="$0.00" FontSize="17" FontAttributes="Bold" TextColor="White"/>
-                                </VerticalStackLayout>
-                            </Border>
-
-                            <!-- Tarjeta Gastos -->
-                            <Border Grid.Column="1"
-                                    BackgroundColor="#254A37"
-                                    Stroke="#254A37"
-                                    StrokeThickness="1"
-                                    StrokeShape="RoundRectangle 14"
-                                    Padding="14, 12">
-                                <VerticalStackLayout Spacing="4">
-                                    <Label Text="↓ Gastos" FontSize="12" FontAttributes="Bold" TextColor="#81C784"/>
-                                    <Label x:Name="LabelGastos" Text="$0.00" FontSize="17" FontAttributes="Bold" TextColor="White"/>
-                                </VerticalStackLayout>
-                            </Border>
-                        </Grid>
-
-                    </VerticalStackLayout>
+                        <Border Grid.Column="1"
+                                WidthRequest="52"
+                                HeightRequest="52"
+                                BackgroundColor="#264D3F"
+                                Stroke="#5BBD8A"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 18"
+                                VerticalOptions="Start">
+                            <Label Text="$"
+                                   FontSize="25"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        <Label Grid.Row="1"
+                               Grid.ColumnSpan="2"
+                               Text="Ingresos menos gastos registrados"
+                               FontSize="13"
+                               TextColor="#C5F4DC"/>
+                    </Grid>
                 </Border>
 
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="14">
+                    <Border BackgroundColor="#141B2B"
+                            Stroke="#28334B"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20"
+                            Padding="17">
+                        <VerticalStackLayout Spacing="12">
+                            <Border WidthRequest="34"
+                                    HeightRequest="34"
+                                    BackgroundColor="#173C32"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 11">
+                                <Label Text="↗"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       TextColor="#68E0A3"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Border>
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Ingresos"
+                                       FontSize="12"
+                                       TextColor="#8491A7"/>
+                                <Label x:Name="LabelIngresos"
+                                       Text="$0.00"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="#68E0A3"
+                                       LineBreakMode="TailTruncation"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            BackgroundColor="#141B2B"
+                            Stroke="#28334B"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20"
+                            Padding="17">
+                        <VerticalStackLayout Spacing="12">
+                            <Border WidthRequest="34"
+                                    HeightRequest="34"
+                                    BackgroundColor="#3B2532"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 11">
+                                <Label Text="↘"
+                                       FontSize="20"
+                                       FontAttributes="Bold"
+                                       TextColor="#FF8585"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Border>
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Gastos"
+                                       FontSize="12"
+                                       TextColor="#8491A7"/>
+                                <Label x:Name="LabelGastos"
+                                       Text="$0.00"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="#FF8585"
+                                       LineBreakMode="TailTruncation"/>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
                 <!-- TARJETA: GRÁFICA DE DISTRIBUCIÓN -->
-                <Border BackgroundColor="#1A1D29"
-                        Stroke="#2E354A"
+                <Border BackgroundColor="#141B2B"
+                        Stroke="#28334B"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 18"
                         Padding="18">
@@ -93,26 +155,26 @@
                         <Label Text="PROPORCIÓN INGRESOS VS GASTOS"
                                FontSize="11"
                                FontAttributes="Bold"
-                               TextColor="#8E95A5"/>
+                               TextColor="#8491A7"/>
 
                         <Grid ColumnDefinitions="Auto, *" ColumnSpacing="18" VerticalOptions="Center">
                             <!-- Gráfica visual renderizada en MAUI  -->
                             <GraphicsView Grid.Column="0"
-                                          x:Name="GraficaDonaView" 
-                                          HeightRequest="120" 
-                                          WidthRequest="120" 
+                                          x:Name="GraficaDonaView"
+                                          HeightRequest="120"
+                                          WidthRequest="120"
                                           VerticalOptions="Center"
                                           HorizontalOptions="Center"/>
 
                             <!-- Leyenda informativa -->
                             <VerticalStackLayout Grid.Column="1" Spacing="12" VerticalOptions="Center">
                                 <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10" VerticalOptions="Center">
-                                    <BoxView Grid.Column="0" WidthRequest="12" HeightRequest="12" Color="#81C784" CornerRadius="6" VerticalOptions="Center"/>
+                                    <BoxView Grid.Column="0" WidthRequest="12" HeightRequest="12" Color="#FF8585" CornerRadius="6" VerticalOptions="Center"/>
                                     <Label Grid.Column="1" Text="Gastos" FontSize="13" TextColor="White" VerticalOptions="Center"/>
                                 </Grid>
 
                                 <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10" VerticalOptions="Center">
-                                    <BoxView Grid.Column="0" WidthRequest="12" HeightRequest="12" Color="#E57373" CornerRadius="6" VerticalOptions="Center"/>
+                                    <BoxView Grid.Column="0" WidthRequest="12" HeightRequest="12" Color="#68E0A3" CornerRadius="6" VerticalOptions="Center"/>
                                     <Label Grid.Column="1" Text="Ingresos" FontSize="13" TextColor="White" VerticalOptions="Center"/>
                                 </Grid>
                             </VerticalStackLayout>
@@ -125,20 +187,20 @@
                     <Label Text="MOVIMIENTOS RECIENTES"
                            FontSize="11"
                            FontAttributes="Bold"
-                           TextColor="#8E95A5"
+                           TextColor="#8491A7"
                            Margin="2, 4, 2, 0"/>
 
                     <CollectionView x:Name="ListaMovimientos">
                         <CollectionView.EmptyView>
-                            <Border BackgroundColor="#1A1D29"
-                                    Stroke="#2E354A"
+                            <Border BackgroundColor="#141B2B"
+                                    Stroke="#28334B"
                                     StrokeThickness="1"
                                     StrokeShape="RoundRectangle 16"
                                     Padding="24">
                                 <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
                                     <Label Text="📭" FontSize="36" HorizontalOptions="Center"/>
                                     <Label Text="Aún no hay movimientos registrados"
-                                           TextColor="#8E95A5"
+                                           TextColor="#8491A7"
                                            FontSize="14"
                                            HorizontalOptions="Center"/>
                                 </VerticalStackLayout>
@@ -148,24 +210,24 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Border StrokeShape="RoundRectangle 14"
-                                        Stroke="#293043"
+                                        Stroke="#28334B"
                                         StrokeThickness="1"
-                                        BackgroundColor="#1A1D29"
+                                        BackgroundColor="#141B2B"
                                         Padding="14, 12"
                                         Margin="0, 0, 0, 10">
                                     <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="12" VerticalOptions="Center">
 
                                         <!-- Icono dinámico según categoría -->
-                                        <Border Grid.Column="0" 
-                                                BackgroundColor="#242B3C" 
-                                                StrokeShape="RoundRectangle 10" 
-                                                WidthRequest="42" 
-                                                HeightRequest="42" 
+                                        <Border Grid.Column="0"
+                                                BackgroundColor="#1B2639"
+                                                StrokeShape="RoundRectangle 10"
+                                                WidthRequest="42"
+                                                HeightRequest="42"
                                                 Stroke="Transparent"
                                                 VerticalOptions="Center">
-                                            <Label Text="{Binding Icono}" 
-                                                   FontSize="20" 
-                                                   HorizontalOptions="Center" 
+                                            <Label Text="{Binding Icono}"
+                                                   FontSize="20"
+                                                   HorizontalOptions="Center"
                                                    VerticalOptions="Center"/>
                                         </Border>
 
@@ -173,7 +235,7 @@
                                         <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                                             <Label Text="{Binding Categoria}" FontAttributes="Bold" TextColor="White" FontSize="14"/>
                                             <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}"
-                                                   FontSize="12" TextColor="#8E95A5"/>
+                                                   FontSize="12" TextColor="#8491A7"/>
                                         </VerticalStackLayout>
 
                                         <!-- Monto -->

@@ -4,6 +4,7 @@ public class Categoria
 {
     public int Pk { get; set; }
     public int Id { get => Pk; set => Pk = value; }
+    public int UsuarioId { get; set; }
     public string Nombre { get; set; } = string.Empty;
     public string Imagen { get; set; } = string.Empty;
     public string Tipo { get; set; } = "Gasto"; // "Ingreso" o "Gasto"

@@ -41,7 +41,7 @@ public partial class Perfil : ContentPage
 
             bool esInvitado = Sesion.EsInvitado || usuario.Id == 0;
             LblTipoCuenta.Text = esInvitado ? "Invitado" : "Principal";
-            LblTipoCuenta.TextColor = esInvitado ? Color.FromArgb("#FFCA28") : Color.FromArgb("#81C784");
+            LblTipoCuenta.TextColor = esInvitado ? Color.FromArgb("#FFC66D") : Color.FromArgb("#68E0A3");
             BtnRegistrarPermanente.IsVisible = esInvitado;
 
             LblTotalMovimientos.Text = Sesion.Movimientos.Count.ToString();
@@ -57,7 +57,7 @@ public partial class Perfil : ContentPage
             EntryEdad.Text = "";
             EntryContrasena.Text = "";
             LblTipoCuenta.Text = "Invitado";
-            LblTipoCuenta.TextColor = Color.FromArgb("#FFCA28");
+            LblTipoCuenta.TextColor = Color.FromArgb("#FFC66D");
             BtnRegistrarPermanente.IsVisible = true;
             LblTotalMovimientos.Text = Sesion.Movimientos.Count.ToString();
         }
@@ -236,7 +236,7 @@ public partial class Perfil : ContentPage
     private async Task MostrarMensaje(string mensaje, bool esExito)
     {
         LabelMensajePerfil.Text = mensaje;
-        LabelMensajePerfil.TextColor = esExito ? Color.FromArgb("#81C784") : Color.FromArgb("#FF5252");
+        LabelMensajePerfil.TextColor = esExito ? Color.FromArgb("#68E0A3") : Color.FromArgb("#FF8585");
         LabelMensajePerfil.IsVisible = true;
 
         if (esExito)

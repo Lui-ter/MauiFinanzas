@@ -20,9 +20,9 @@ public class Movimiento
         _ => Tipo?.Equals("Ingreso", StringComparison.OrdinalIgnoreCase) == true ? "💰" : "💸"
     };
 
-    public Color ColorTipo => Tipo?.Equals("Ingreso", StringComparison.OrdinalIgnoreCase) == true 
-        ? Color.FromArgb("#81C784") 
-        : Color.FromArgb("#E57373");
+    public Color ColorTipo => Tipo?.Equals("Ingreso", StringComparison.OrdinalIgnoreCase) == true
+        ? Color.FromArgb("#68E0A3")
+        : Color.FromArgb("#FF8585");
 
     public string MontoFormateado => Tipo?.Equals("Ingreso", StringComparison.OrdinalIgnoreCase) == true
         ? $"+{Monto:C}"

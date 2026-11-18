@@ -21,7 +21,7 @@ public partial class Inicio : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if (_databaseService != null)
+        if (_databaseService != null && (Sesion.UsuarioActual?.Id ?? 0) > 0)
         {
             try
             {
@@ -56,20 +56,11 @@ public partial class Inicio : ContentPage
             LabelSaludo.Text = "¡Bienvenido a MovilL!";
         }
 
-        // Totales rápidos en memoria
-        var ingresos = Sesion.Movimientos
-            .Where(m => m.Tipo == "Ingreso")
-            .Sum(m => m.Monto);
-
-        var gastos = Sesion.Movimientos
-            .Where(m => m.Tipo == "Gasto")
-            .Sum(m => m.Monto);
-
-        var balance = ingresos - gastos;
-
-        LabelBalanceRapido.Text = balance.ToString("C");
-        LabelIngresosRapido.Text = ingresos.ToString("C");
-        LabelGastosRapido.Text = gastos.ToString("C");
+        ListaMovimientosRecientes.ItemsSource = Sesion.Movimientos
+            .OrderByDescending(m => m.Fecha)
+            .ThenByDescending(m => m.Id)
+            .Take(3)
+            .ToList();
     }
 
     private async void OnUsuarioClicked(object? sender, EventArgs e)

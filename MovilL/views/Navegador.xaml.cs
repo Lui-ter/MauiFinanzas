@@ -40,19 +40,19 @@ public partial class Navegador : ContentView
 
         // Home
         bool esHome = activa.Equals("Home", StringComparison.OrdinalIgnoreCase);
-        TextHome.TextColor = esHome ? Color.FromArgb("#4CAF50") : Color.FromArgb("#8E95A5");
+        TextHome.TextColor = esHome ? Color.FromArgb("#49CE8D") : Color.FromArgb("#8491A7");
         TextHome.FontAttributes = esHome ? FontAttributes.Bold : FontAttributes.None;
         TabHome.Opacity = esHome ? 1.0 : 0.75;
 
         // Movimiento
         bool esMovimiento = activa.Equals("Movimiento", StringComparison.OrdinalIgnoreCase);
-        TextMovimiento.TextColor = esMovimiento ? Color.FromArgb("#4CAF50") : Color.FromArgb("#8E95A5");
+        TextMovimiento.TextColor = esMovimiento ? Color.FromArgb("#49CE8D") : Color.FromArgb("#8491A7");
         TextMovimiento.FontAttributes = esMovimiento ? FontAttributes.Bold : FontAttributes.None;
         TabMovimiento.Opacity = esMovimiento ? 1.0 : 0.75;
 
         // Resumen
         bool esResumen = activa.Equals("Resumen", StringComparison.OrdinalIgnoreCase);
-        TextResumen.TextColor = esResumen ? Color.FromArgb("#4CAF50") : Color.FromArgb("#8E95A5");
+        TextResumen.TextColor = esResumen ? Color.FromArgb("#49CE8D") : Color.FromArgb("#8491A7");
         TextResumen.FontAttributes = esResumen ? FontAttributes.Bold : FontAttributes.None;
         TabResumen.Opacity = esResumen ? 1.0 : 0.75;
     }

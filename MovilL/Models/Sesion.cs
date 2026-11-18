@@ -23,5 +23,6 @@ public static class Sesion
         NombreUsuario = "";
         UsuarioActual = null;
         Movimientos.Clear();
+        Categorias = Categoria.ListaCategorias;
     }
 }

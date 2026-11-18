@@ -21,6 +21,7 @@ public class MovilDbContext : Microsoft.EntityFrameworkCore.DbContext
 
         modelBuilder.Entity<Categoria>().HasKey(c => c.Pk);
         modelBuilder.Entity<Categoria>().Ignore(c => c.Id);
+        modelBuilder.Entity<Categoria>().HasIndex(c => c.UsuarioId);
         modelBuilder.Entity<Categoria>().HasData(Categoria.ListaCategorias);
 
         modelBuilder.Entity<Movimiento>().HasKey(m => m.Id);

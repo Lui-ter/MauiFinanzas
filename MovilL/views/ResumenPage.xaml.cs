@@ -25,7 +25,7 @@ public partial class ResumenPage : ContentPage
         MenuUsuario.CargarUsuario();
         ToolbarUsuario.IconImageSource = Sesion.UsuarioActual?.Imagen ?? "user.png";
 
-        if (_databaseService != null)
+        if (_databaseService != null && (Sesion.UsuarioActual?.Id ?? 0) > 0)
         {
             try
             {
@@ -76,7 +76,7 @@ public partial class ResumenPage : ContentPage
     }
 }
 
-// Dibujante nativo para el GraphicsView: Verde = Ingresos / Rojo = Gastos
+// Dibujante nativo para el GraphicsView: verde = ingresos / coral = gastos
 public class DonaDrawable : IDrawable
 {
     private readonly float _ingresos;
@@ -102,7 +102,7 @@ public class DonaDrawable : IDrawable
         // 1. Si no hay datos registrados: anillo neutro gris
         if (total <= 0)
         {
-            canvas.StrokeColor = Color.FromArgb("#2D3042");
+            canvas.StrokeColor = Color.FromArgb("#28334B");
             canvas.DrawCircle(cx, cy, radius);
             return;
         }
@@ -110,7 +110,7 @@ public class DonaDrawable : IDrawable
         // 2. Si solo hay ingresos: 100% Verde
         if (_gastos <= 0)
         {
-            canvas.StrokeColor = Color.FromArgb("#81C784");
+            canvas.StrokeColor = Color.FromArgb("#68E0A3");
             canvas.DrawCircle(cx, cy, radius);
             return;
         }
@@ -118,21 +118,21 @@ public class DonaDrawable : IDrawable
         // 3. Si solo hay gastos: 100% Rojo
         if (_ingresos <= 0)
         {
-            canvas.StrokeColor = Color.FromArgb("#E57373");
+            canvas.StrokeColor = Color.FromArgb("#FF8585");
             canvas.DrawCircle(cx, cy, radius);
             return;
         }
 
         // 4. Ambos presentes:
         // Dibujamos la base completa en ROJO (Gastos) con DrawCircle
-        canvas.StrokeColor = Color.FromArgb("#E57373");
+        canvas.StrokeColor = Color.FromArgb("#FF8585");
         canvas.DrawCircle(cx, cy, radius);
 
         // Y encima dibujamos la porción proporcional exacta de INGRESOS en VERDE
         float proporcionIngresos = _ingresos / total;
         float anguloIngresos = Math.Clamp(proporcionIngresos * 360f, 1f, 359f);
 
-        canvas.StrokeColor = Color.FromArgb("#81C784");
+        canvas.StrokeColor = Color.FromArgb("#68E0A3");
         // Dibuja en sentido horario empezando a las 12:00 (-90°)
         canvas.DrawArc(cx - radius, cy - radius, radius * 2, radius * 2, -90, -90 + anguloIngresos, true, false);
     }

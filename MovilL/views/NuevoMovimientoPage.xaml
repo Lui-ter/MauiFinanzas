@@ -5,7 +5,7 @@
              x:Class="MovilL.views.NuevoMovimientoPage"
              Title="Nuevo movimiento"
              Shell.TabBarIsVisible="False"
-             BackgroundColor="#12141D">
+             BackgroundColor="#0B1020">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="ToolbarUsuario"
@@ -20,23 +20,160 @@
         <ScrollView Grid.Row="0" Orientation="Vertical" HorizontalScrollBarVisibility="Never">
             <VerticalStackLayout Spacing="16" HorizontalOptions="Fill" Padding="16, 12">
 
-                <!-- Título y subtítulo -->
-                <VerticalStackLayout Spacing="4" Margin="2, 4, 2, 0" HorizontalOptions="Fill">
-                    <Label Text="Nuevo Movimiento"
-                           FontSize="22"
-                           FontAttributes="Bold"
-                           TextColor="White"/>
-                    <Label Text="Registra tus ingresos o gastos con vista previa instantánea"
-                           FontSize="13"
-                           TextColor="#8E95A5"
-                           LineBreakMode="WordWrap"/>
-                </VerticalStackLayout>
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="12" Margin="2, 4, 2, 0">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Movimientos"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="White"/>
+                        <Label Text="Registra y organiza tus ingresos y gastos"
+                               FontSize="13"
+                               TextColor="#8491A7"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1"
+                            Text="Crear tipo&#10;movimiento"
+                            SemanticProperties.Description="Crear tipo de movimiento y categoría"
+                            Clicked="OnMostrarFormularioCategoriaClicked"
+                            BackgroundColor="#202A3D"
+                            TextColor="#68E0A3"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HeightRequest="42"
+                            Padding="12,0"
+                            CornerRadius="12"
+                            VerticalOptions="Center"/>
+                </Grid>
+
+                <Border x:Name="FormularioCategoria"
+                        IsVisible="False"
+                        StrokeShape="RoundRectangle 18"
+                        BackgroundColor="#141B2B"
+                        Stroke="#28334B"
+                        StrokeThickness="1"
+                        Padding="16">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                            <VerticalStackLayout Spacing="3">
+                                <Label Text="Crear tipo de movimiento"
+                                       FontSize="17"
+                                       FontAttributes="Bold"
+                                       TextColor="White"/>
+                                <Label Text="Define si será ingreso o gasto y personaliza su categoría."
+                                       FontSize="12"
+                                       TextColor="#8491A7"
+                                       LineBreakMode="WordWrap"/>
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1"
+                                    Text="Cerrar"
+                                    Clicked="OnOcultarFormularioCategoriaClicked"
+                                    BackgroundColor="#202A3D"
+                                    TextColor="#A6B1C5"
+                                    FontSize="12"
+                                    CornerRadius="10"
+                                    Padding="10,0"
+                                    HeightRequest="36"
+                                    VerticalOptions="Start"/>
+                        </Grid>
+
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
+                            <Border StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#0E1524"
+                                    Stroke="#303B53"
+                                    StrokeThickness="1"
+                                    Padding="12,0"
+                                    HeightRequest="48">
+                                <Picker x:Name="PickerTipoCategoria"
+                                        FontSize="14"
+                                        TextColor="White"
+                                        TitleColor="#8491A7"
+                                        VerticalOptions="Center">
+                                    <Picker.Items>
+                                        <x:String>Ingreso</x:String>
+                                        <x:String>Gasto</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Nombre de la categoría" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
+                            <Border StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#0E1524"
+                                    Stroke="#303B53"
+                                    StrokeThickness="1"
+                                    Padding="12,0"
+                                    HeightRequest="48">
+                                <Entry x:Name="EntryNuevaCategoria"
+                                       Placeholder="Ej. Mascotas, salud, ventas"
+                                       PlaceholderColor="#71809A"
+                                       TextColor="White"
+                                       MaxLength="40"
+                                       ReturnType="Done"
+                                       VerticalOptions="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="96, *" ColumnSpacing="12">
+                            <Border WidthRequest="96"
+                                    HeightRequest="88"
+                                    StrokeShape="RoundRectangle 12"
+                                    BackgroundColor="#0E1524"
+                                    Stroke="#303B53"
+                                    StrokeThickness="1"
+                                    Padding="4">
+                                <Grid>
+                                    <Image x:Name="ImagePreviewNuevaCategoria"
+                                           Aspect="AspectFill"
+                                           IsVisible="False"/>
+                                    <Label x:Name="LabelSinImagenCategoria"
+                                           Text="Sin imagen"
+                                           FontSize="11"
+                                           TextColor="#8491A7"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Grid>
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                <Button Text="Seleccionar imagen"
+                                        Clicked="OnSeleccionarImagenCategoriaClicked"
+                                        BackgroundColor="#202A3D"
+                                        TextColor="#68E0A3"
+                                        FontAttributes="Bold"
+                                        FontSize="13"
+                                        HeightRequest="42"
+                                        CornerRadius="10"/>
+                                <Label Text="Formatos JPG o PNG"
+                                       FontSize="11"
+                                       TextColor="#8491A7"/>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Label x:Name="LabelCategoriaMensaje"
+                               IsVisible="False"
+                               FontSize="12"
+                               LineBreakMode="WordWrap"/>
+
+                        <Button x:Name="BtnGuardarCategoria"
+                                Text="Guardar categoría"
+                                Clicked="OnGuardarCategoriaClicked"
+                                BackgroundColor="#68E0A3"
+                                TextColor="#0B2018"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                HeightRequest="46"
+                                CornerRadius="11"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout x:Name="FormularioMovimiento" Spacing="16">
 
                 <!-- TARJETA: FORMULARIO -->
-                <Border StrokeShape="RoundRectangle 18" 
-                        BackgroundColor="#1A1D29" 
-                        Stroke="#2E354A" 
-                        StrokeThickness="1" 
+                <Border StrokeShape="RoundRectangle 18"
+                        BackgroundColor="#141B2B"
+                        Stroke="#28334B"
+                        StrokeThickness="1"
                         Padding="16"
                         HorizontalOptions="Fill">
                     <VerticalStackLayout Spacing="14" HorizontalOptions="Fill">
@@ -44,26 +181,26 @@
                         <Label Text="DETALLES DE LA OPERACIÓN"
                                FontAttributes="Bold"
                                FontSize="11"
-                               TextColor="#81C784"
+                               TextColor="#68E0A3"
                                Margin="2,0"/>
 
                         <!-- Tipo de movimiento -->
                         <VerticalStackLayout Spacing="5" HorizontalOptions="Fill">
-                            <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="13" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 10" 
-                                    BackgroundColor="#222738" 
-                                    Stroke="#353D54" 
-                                    StrokeThickness="1" 
-                                    Padding="12,0" 
-                                    HeightRequest="48" 
+                            <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
+                            <Border StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#0E1524"
+                                    Stroke="#303B53"
+                                    StrokeThickness="1"
+                                    Padding="12,0"
+                                    HeightRequest="48"
                                     MinimumHeightRequest="48"
                                     HorizontalOptions="Fill">
-                                <Picker x:Name="PickerTipo" 
-                                        FontSize="14" 
-                                        TextColor="White" 
-                                        TitleColor="#8E95A5" 
-                                        HorizontalOptions="Fill" 
-                                        VerticalOptions="Center" 
+                                <Picker x:Name="PickerTipo"
+                                        FontSize="14"
+                                        TextColor="White"
+                                        TitleColor="#8491A7"
+                                        HorizontalOptions="Fill"
+                                        VerticalOptions="Center"
                                         SelectedIndexChanged="OnTipoChanged">
                                     <Picker.Items>
                                         <x:String>Ingreso</x:String>
@@ -75,20 +212,20 @@
 
                         <!-- Categoría -->
                         <VerticalStackLayout Spacing="5" HorizontalOptions="Fill">
-                            <Label Text="Categoría" FontAttributes="Bold" FontSize="13" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 10" 
-                                    BackgroundColor="#222738" 
-                                    Stroke="#353D54" 
-                                    StrokeThickness="1" 
-                                    Padding="12,0" 
-                                    HeightRequest="48" 
+                            <Label Text="Categoría" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
+                            <Border StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#0E1524"
+                                    Stroke="#303B53"
+                                    StrokeThickness="1"
+                                    Padding="12,0"
+                                    HeightRequest="48"
                                     MinimumHeightRequest="48"
                                     HorizontalOptions="Fill">
-                                <Picker x:Name="PickerCategoria"                  
+                                <Picker x:Name="PickerCategoria"
                                         ItemDisplayBinding="{Binding Nombre}"
                                         FontSize="14"
                                         TextColor="White"
-                                        TitleColor="#8E95A5"
+                                        TitleColor="#8491A7"
                                         HorizontalOptions="Fill"
                                         VerticalOptions="Center"
                                         SelectedIndexChanged="OnFormularioChanged"/>
@@ -97,18 +234,18 @@
 
                         <!-- Monto -->
                         <VerticalStackLayout Spacing="5" HorizontalOptions="Fill">
-                            <Label Text="Monto ($)" FontAttributes="Bold" FontSize="13" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 10" 
-                                    BackgroundColor="#222738" 
-                                    Stroke="#353D54" 
-                                    StrokeThickness="1" 
-                                    Padding="12,0" 
-                                    HeightRequest="48" 
+                            <Label Text="Monto ($)" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
+                            <Border StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#0E1524"
+                                    Stroke="#303B53"
+                                    StrokeThickness="1"
+                                    Padding="12,0"
+                                    HeightRequest="48"
                                     MinimumHeightRequest="48"
                                     HorizontalOptions="Fill">
                                 <Entry x:Name="EntryMonto"
                                        Placeholder="0.00"
-                                       PlaceholderColor="#6E768E"
+                                       PlaceholderColor="#71809A"
                                        TextColor="White"
                                        Keyboard="Numeric"
                                        FontSize="15"
@@ -120,13 +257,13 @@
 
                         <!-- Fecha -->
                         <VerticalStackLayout Spacing="5" HorizontalOptions="Fill">
-                            <Label Text="Fecha" FontAttributes="Bold" FontSize="13" TextColor="#B0B5C6"/>
-                            <Border StrokeShape="RoundRectangle 10" 
-                                    BackgroundColor="#222738" 
-                                    Stroke="#353D54" 
-                                    StrokeThickness="1" 
-                                    Padding="12,0" 
-                                    HeightRequest="48" 
+                            <Label Text="Fecha" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
+                            <Border StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#0E1524"
+                                    Stroke="#303B53"
+                                    StrokeThickness="1"
+                                    Padding="12,0"
+                                    HeightRequest="48"
                                     MinimumHeightRequest="48"
                                     HorizontalOptions="Fill">
                                 <DatePicker x:Name="DatePickerFecha"
@@ -140,7 +277,7 @@
 
                         <!-- Mensaje de estado -->
                         <Label x:Name="LabelMensaje"
-                               TextColor="#4CAF50"
+                               TextColor="#49CE8D"
                                FontSize="13"
                                FontAttributes="Bold"
                                IsVisible="False"
@@ -152,10 +289,10 @@
                 </Border>
 
                 <!-- TARJETA: VISTA PREVIA Y CONFIRMACIÓN -->
-                <Border StrokeShape="RoundRectangle 18" 
-                        BackgroundColor="#1A1D29" 
-                        Stroke="#2E354A" 
-                        StrokeThickness="1" 
+                <Border StrokeShape="RoundRectangle 18"
+                        BackgroundColor="#141B2B"
+                        Stroke="#28334B"
+                        StrokeThickness="1"
                         Padding="16"
                         HorizontalOptions="Fill">
                     <VerticalStackLayout Spacing="16" HorizontalOptions="Fill">
@@ -164,25 +301,25 @@
                             <Label Text="VISTA PREVIA EN VIVO"
                                    FontAttributes="Bold"
                                    FontSize="11"
-                                   TextColor="#8E95A5"
+                                   TextColor="#8491A7"
                                    VerticalOptions="Center"/>
-                            <Label x:Name="LabelPreviewTipo" 
+                            <Label x:Name="LabelPreviewTipo"
                                    Grid.Column="1"
-                                   Text="INGRESO" 
-                                   FontAttributes="Bold" 
-                                   FontSize="13" 
-                                   TextColor="#4CAF50"
+                                   Text="INGRESO"
+                                   FontAttributes="Bold"
+                                   FontSize="13"
+                                   TextColor="#49CE8D"
                                    HorizontalOptions="End"
                                    HorizontalTextAlignment="End"
                                    VerticalOptions="Center"/>
                         </Grid>
 
                         <!-- Cuadro con la Imagen ocupando todo el ancho de forma responsiva -->
-                        <Border x:Name="BorderIcono" 
-                                StrokeShape="RoundRectangle 14" 
-                                BackgroundColor="#222738" 
-                                Stroke="#4CAF50" 
-                                StrokeThickness="2" 
+                        <Border x:Name="BorderIcono"
+                                StrokeShape="RoundRectangle 14"
+                                BackgroundColor="#0E1524"
+                                Stroke="#49CE8D"
+                                StrokeThickness="2"
                                 HeightRequest="140"
                                 MinimumHeightRequest="140"
                                 MaximumHeightRequest="140"
@@ -215,31 +352,31 @@
                         </Border>
 
                         <!-- Resumen dinámico: Monto y Fecha en formato fila limpia -->
-                        <Border BackgroundColor="#222738"
-                                Stroke="#323A50"
+                        <Border BackgroundColor="#0E1524"
+                                Stroke="#303B53"
                                 StrokeThickness="1"
                                 StrokeShape="RoundRectangle 12"
                                 Padding="14, 10"
                                 HorizontalOptions="Fill">
                             <VerticalStackLayout Spacing="8" HorizontalOptions="Fill">
                                 <Grid ColumnDefinitions="Auto, *" HorizontalOptions="Fill">
-                                    <Label Text="Monto total:" FontAttributes="Bold" TextColor="#8E95A5" FontSize="14" VerticalOptions="Center"/>
+                                    <Label Text="Monto total:" FontAttributes="Bold" TextColor="#8491A7" FontSize="14" VerticalOptions="Center"/>
                                     <Label x:Name="LabelPreviewMonto" Grid.Column="1" Text="$ 0,00" FontAttributes="Bold" FontSize="17" TextColor="White" HorizontalOptions="End" HorizontalTextAlignment="End" LineBreakMode="NoWrap" VerticalOptions="Center"/>
                                 </Grid>
-                                <BoxView HeightRequest="1" Color="#30384C" HorizontalOptions="Fill"/>
+                                <BoxView HeightRequest="1" Color="#303B53" HorizontalOptions="Fill"/>
                                 <Grid ColumnDefinitions="Auto, *" HorizontalOptions="Fill">
-                                    <Label Text="Fecha de registro:" FontAttributes="Bold" TextColor="#8E95A5" FontSize="13" VerticalOptions="Center"/>
-                                    <Label x:Name="LabelPreviewFecha" Grid.Column="1" Text="--/--/----" FontSize="13" TextColor="#B0B5C6" HorizontalOptions="End" HorizontalTextAlignment="End" LineBreakMode="NoWrap" VerticalOptions="Center"/>
+                                    <Label Text="Fecha de registro:" FontAttributes="Bold" TextColor="#8491A7" FontSize="13" VerticalOptions="Center"/>
+                                    <Label x:Name="LabelPreviewFecha" Grid.Column="1" Text="--/--/----" FontSize="13" TextColor="#A6B1C5" HorizontalOptions="End" HorizontalTextAlignment="End" LineBreakMode="NoWrap" VerticalOptions="Center"/>
                                 </Grid>
                             </VerticalStackLayout>
                         </Border>
 
                         <!-- Botón Guardar Responsivo y Grande -->
                         <Button x:Name="BtnGuardar"
-                                Text="Guardar ingreso" 
-                                Clicked="OnGuardarClicked" 
-                                BackgroundColor="#4CAF50" 
-                                TextColor="White" 
+                                Text="Guardar ingreso"
+                                Clicked="OnGuardarClicked"
+                                BackgroundColor="#49CE8D"
+                                TextColor="#0B2018"
                                 FontAttributes="Bold"
                                 FontSize="15"
                                 HeightRequest="50"
@@ -248,6 +385,8 @@
 
                     </VerticalStackLayout>
                 </Border>
+
+                </VerticalStackLayout>
 
             </VerticalStackLayout>
         </ScrollView>

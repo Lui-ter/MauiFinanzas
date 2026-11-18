@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:MovilL.Views.Controls"
              xmlns:views="clr-namespace:MovilL.views"
              x:Class="MovilL.views.Inicio"
              Title="Inicio"
              Shell.TabBarIsVisible="False"
-             BackgroundColor="#12141D">
+             BackgroundColor="#0B1020">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="ToolbarUsuario"
@@ -16,234 +15,169 @@
     </ContentPage.ToolbarItems>
 
     <Grid x:Name="MainGrid" RowDefinitions="*, Auto">
-
-        <!-- Contenido principal scrolleable -->
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout Padding="20" Spacing="22" MaximumWidthRequest="700" HorizontalOptions="Center">
+            <VerticalStackLayout Padding="22,26"
+                                 Spacing="22"
+                                 MaximumWidthRequest="760"
+                                 HorizontalOptions="Center">
 
-                <!-- ENCABEZADO / HERO -->
-                <Border BackgroundColor="#1A1D29"
-                        Stroke="#333A4E"
-                        StrokeThickness="1"
-                        StrokeShape="RoundRectangle 20"
-                        Padding="22">
-                    <VerticalStackLayout Spacing="10">
-                        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                            <Label Text="👋" FontSize="26"/>
-                            <Label x:Name="LabelSaludo"
-                                   Text="¡Bienvenido a MovilL!"
-                                   FontSize="22"
-                                   FontAttributes="Bold"
-                                   TextColor="White"
-                                   VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-
-                        <Label Text="Tu gestor financiero personal todo en uno. Diseñado para darte claridad, control y mejores decisiones sobre tus ingresos y gastos diarios."
-                               FontSize="14"
-                               TextColor="#B0B5C6"
-                               LineHeight="1.3"/>
-
-                        <!-- Tarjeta resumen rápido de estado financiero -->
-                        <Border BackgroundColor="#25293A"
-                                Stroke="#3A405A"
-                                StrokeShape="RoundRectangle 12"
-                                Padding="15"
-                                Margin="0, 8, 0, 0">
-                            <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10">
-                                <VerticalStackLayout Grid.Column="0" Spacing="2">
-                                    <Label Text="Balance Actual" FontSize="11" TextColor="#9E9E9E"/>
-                                    <Label x:Name="LabelBalanceRapido" Text="$0.00" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                </VerticalStackLayout>
-
-                                <VerticalStackLayout Grid.Column="1" Spacing="2">
-                                    <Label Text="Ingresos" FontSize="11" TextColor="#81C784"/>
-                                    <Label x:Name="LabelIngresosRapido" Text="$0.00" FontSize="15" FontAttributes="Bold" TextColor="#81C784"/>
-                                </VerticalStackLayout>
-
-                                <VerticalStackLayout Grid.Column="2" Spacing="2">
-                                    <Label Text="Gastos" FontSize="11" TextColor="#E57373"/>
-                                    <Label x:Name="LabelGastosRapido" Text="$0.00" FontSize="15" FontAttributes="Bold" TextColor="#E57373"/>
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
-                    </VerticalStackLayout>
-                </Border>
-
-                <!-- SECCIÓN: PRESENTACIÓN DE FUNCIONALIDADES -->
-                <VerticalStackLayout Spacing="12">
-                    <Label Text="¿CÓMO FUNCIONA ESTA APLICACIÓN?"
-                           FontSize="15"
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="TU ESPACIO FINANCIERO"
+                           FontSize="10"
+                           CharacterSpacing="1.4"
                            FontAttributes="Bold"
-                           TextColor="#81C784"
-                           Margin="4, 0"/>
-
-                    <!-- Tarjeta 1: Registro de Movimientos -->
-                    <Border BackgroundColor="#1A1D29"
-                            Stroke="#333A4E"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 16"
-                            Padding="18">
-                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
-                            <Border Grid.Column="0"
-                                    WidthRequest="48"
-                                    HeightRequest="48"
-                                    StrokeShape="RoundRectangle 24"
-                                    Stroke="Transparent"
-                                    BackgroundColor="#2E3C2B"
-                                    VerticalOptions="Start">
-                                <Label Text="➕" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
-                            </Border>
-
-                            <VerticalStackLayout Grid.Column="1" Spacing="6">
-                                <Label Text="1. Registro Ágil de Movimientos"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="White"/>
-                                <Label Text="Añade entradas de dinero o consumos diarios al instante. Asigna montos, fecha y categorízalos (sueldo, comida, arriendo, servicios, transporte o estudios) con vista previa antes de guardar."
-                                       FontSize="13"
-                                       TextColor="#B0B5C6"
-                                       LineHeight="1.25"/>
-                                <Button Text="Registrar un Movimiento →"
-                                        BackgroundColor="#2C3446"
-                                        TextColor="#4CAF50"
-                                        FontAttributes="Bold"
-                                        FontSize="13"
-                                        CornerRadius="8"
-                                        HorizontalOptions="Start"
-                                        Padding="14, 6"
-                                        Margin="0, 4, 0, 0"
-                                        Clicked="OnIrAMovimientoClicked"/>
-                            </VerticalStackLayout>
-                        </Grid>
-                    </Border>
-
-                    <!-- Tarjeta 2: Resumen y Analítica Visual -->
-                    <Border BackgroundColor="#1A1D29"
-                            Stroke="#333A4E"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 16"
-                            Padding="18">
-                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
-                            <Border Grid.Column="0"
-                                    WidthRequest="48"
-                                    HeightRequest="48"
-                                    StrokeShape="RoundRectangle 24"
-                                    Stroke="Transparent"
-                                    BackgroundColor="#233446"
-                                    VerticalOptions="Start">
-                                <Label Text="📊" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
-                            </Border>
-
-                            <VerticalStackLayout Grid.Column="1" Spacing="6">
-                                <Label Text="2. Resumen &amp; Métricas en Tiempo Real"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="White"/>
-                                <Label Text="Revisa tu salud financiera general. Visualiza gráficos de dona con la proporción entre lo que ganas y gastas, métricas automáticas y el historial ordenado de transacciones."
-                                       FontSize="13"
-                                       TextColor="#B0B5C6"
-                                       LineHeight="1.25"/>
-                                <Button Text="Consultar mi Resumen →"
-                                        BackgroundColor="#2C3446"
-                                        TextColor="#64B5F6"
-                                        FontAttributes="Bold"
-                                        FontSize="13"
-                                        CornerRadius="8"
-                                        HorizontalOptions="Start"
-                                        Padding="14, 6"
-                                        Margin="0, 4, 0, 0"
-                                        Clicked="OnIrAResumenClicked"/>
-                            </VerticalStackLayout>
-                        </Grid>
-                    </Border>
-
-                    <!-- Tarjeta 3: Categorización y Hábitos -->
-                    <Border BackgroundColor="#1A1D29"
-                            Stroke="#333A4E"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 16"
-                            Padding="18">
-                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
-                            <Border Grid.Column="0"
-                                    WidthRequest="48"
-                                    HeightRequest="48"
-                                    StrokeShape="RoundRectangle 24"
-                                    Stroke="Transparent"
-                                    BackgroundColor="#423423"
-                                    VerticalOptions="Start">
-                                <Label Text="🎯" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
-                            </Border>
-
-                            <VerticalStackLayout Grid.Column="1" Spacing="6">
-                                <Label Text="3. Clasificación Inteligente"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="White"/>
-                                <Label Text="Identifica con precisión cuáles son tus mayores focos de gasto para detectar fugas de dinero y planificar tus metas de ahorro mes a mes."
-                                       FontSize="13"
-                                       TextColor="#B0B5C6"
-                                       LineHeight="1.25"/>
-                            </VerticalStackLayout>
-                        </Grid>
-                    </Border>
-
-                    <!-- Tarjeta 4: Perfil y Seguridad -->
-                    <Border BackgroundColor="#1A1D29"
-                            Stroke="#333A4E"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 16"
-                            Padding="18">
-                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
-                            <Border Grid.Column="0"
-                                    WidthRequest="48"
-                                    HeightRequest="48"
-                                    StrokeShape="RoundRectangle 24"
-                                    Stroke="Transparent"
-                                    BackgroundColor="#342844"
-                                    VerticalOptions="Start">
-                                <Label Text="🛡️" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
-                            </Border>
-
-                            <VerticalStackLayout Grid.Column="1" Spacing="6">
-                                <Label Text="4. Seguridad &amp; Modo Invitado"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="White"/>
-                                <Label Text="Accede con tus credenciales seguras o explora la aplicación en modo invitado. Puedes administrar tu perfil en cualquier momento desde el botón superior."
-                                       FontSize="13"
-                                       TextColor="#B0B5C6"
-                                       LineHeight="1.25"/>
-                            </VerticalStackLayout>
-                        </Grid>
-                    </Border>
+                           TextColor="#68E0A3"/>
+                    <Label x:Name="LabelSaludo"
+                           Text="¡Bienvenido a MovilL!"
+                           FontSize="29"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                    <Label Text="Organiza tus finanzas, un movimiento a la vez."
+                           FontSize="14"
+                           TextColor="#A6B1C5"/>
                 </VerticalStackLayout>
 
-                <!-- CONSEJO FINANCIERO -->
-                <Border BackgroundColor="#18231C"
-                        Stroke="#2D4B34"
+                <Border BackgroundColor="#141B2B"
+                        Stroke="#28334B"
                         StrokeThickness="1"
-                        StrokeShape="RoundRectangle 12"
-                        Padding="16">
-                    <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
-                        <Label Text="💡" FontSize="22" VerticalOptions="Center"/>
-                        <VerticalStackLayout Spacing="3" VerticalOptions="Center">
-                            <Label Text="Consejo Financiero del Día" FontAttributes="Bold" FontSize="13" TextColor="#A5D6A7"/>
-                            <Label Text="Aplica la regla 50/30/20: 50% necesidades básicas, 30% gustos personales y 20% ahorro e inversión."
-                                   FontSize="12"
-                                   TextColor="#E8F5E9"/>
+                        StrokeShape="RoundRectangle 22"
+                        Padding="20">
+                    <Grid ColumnDefinitions="*, Auto"
+                          RowDefinitions="Auto, Auto"
+                          ColumnSpacing="12"
+                          RowSpacing="14">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Lleva el control de tu día"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                            <Label Text="Registra ingresos y gastos para mantener tu actividad al día."
+                                   FontSize="13"
+                                   TextColor="#A6B1C5"
+                                   LineBreakMode="WordWrap"/>
                         </VerticalStackLayout>
-                    </HorizontalStackLayout>
+                        <Border Grid.Column="1"
+                                WidthRequest="46"
+                                HeightRequest="46"
+                                BackgroundColor="#173C32"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 15"
+                                VerticalOptions="Start">
+                            <Label Text="＋"
+                                   FontSize="25"
+                                   FontAttributes="Bold"
+                                   TextColor="#68E0A3"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </Border>
+                        <Button Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Text="Registrar movimiento"
+                                Clicked="OnIrAMovimientoClicked"
+                                BackgroundColor="#49CE8D"
+                                TextColor="#0B2018"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                HeightRequest="50"
+                                CornerRadius="14"/>
+                    </Grid>
                 </Border>
 
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
+                        <VerticalStackLayout Spacing="3">
+                            <Label Text="Actividad reciente"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                            <Label Text="Tus últimos movimientos"
+                                   FontSize="12"
+                                   TextColor="#8491A7"/>
+                        </VerticalStackLayout>
+                        <Button Grid.Column="1"
+                                Text="Ver resumen  →"
+                                Clicked="OnIrAResumenClicked"
+                                BackgroundColor="Transparent"
+                                TextColor="#68E0A3"
+                                FontSize="12"
+                                FontAttributes="Bold"
+                                Padding="8,6"
+                                VerticalOptions="Center"/>
+                    </Grid>
+
+                    <CollectionView x:Name="ListaMovimientosRecientes"
+                                    HeightRequest="264"
+                                    SelectionMode="None">
+                        <CollectionView.EmptyView>
+                            <Border BackgroundColor="#141B2B"
+                                    Stroke="#28334B"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 18"
+                                    Padding="22">
+                                <VerticalStackLayout HorizontalOptions="Center"
+                                                     VerticalOptions="Center"
+                                                     Spacing="7">
+                                    <Label Text="Todavía no hay movimientos"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           HorizontalTextAlignment="Center"/>
+                                    <Label Text="Cuando registres uno, aparecerá aquí."
+                                           FontSize="12"
+                                           TextColor="#8491A7"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#141B2B"
+                                        Stroke="#28334B"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 16"
+                                        Padding="14,12"
+                                        Margin="0,0,0,8">
+                                    <Grid ColumnDefinitions="Auto, *, Auto"
+                                          ColumnSpacing="12"
+                                          VerticalOptions="Center">
+                                        <Border WidthRequest="40"
+                                                HeightRequest="40"
+                                                BackgroundColor="#1B2639"
+                                                StrokeThickness="0"
+                                                StrokeShape="RoundRectangle 13">
+                                            <Label Text="{Binding Icono}"
+                                                   FontSize="19"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Border>
+                                        <VerticalStackLayout Grid.Column="1"
+                                                             Spacing="3"
+                                                             VerticalOptions="Center">
+                                            <Label Text="{Binding Categoria}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="White"/>
+                                            <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}"
+                                                   FontSize="11"
+                                                   TextColor="#8491A7"/>
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2"
+                                               Text="{Binding MontoFormateado}"
+                                               FontSize="14"
+                                               FontAttributes="Bold"
+                                               TextColor="{Binding ColorTipo}"
+                                               VerticalOptions="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Barra de navegación inferior -->
         <views:Navegador Grid.Row="1" PaginaActiva="Home"/>
-
-        <!-- Menú lateral de usuario -->
         <views:Menu x:Name="MenuUsuario" Grid.RowSpan="2"/>
-
     </Grid>
 </ContentPage>
-
