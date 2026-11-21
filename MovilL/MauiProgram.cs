@@ -32,6 +32,7 @@ namespace MovilL
             builder.Services.AddTransient<views.LoginPage>();
             builder.Services.AddTransient<views.Inicio>();
             builder.Services.AddTransient<views.Perfil>();
+            builder.Services.AddTransient<views.Configuracion>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

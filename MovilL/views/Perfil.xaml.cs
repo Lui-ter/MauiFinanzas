@@ -74,7 +74,7 @@ public partial class Perfil : ContentPage
     private void OnToggleContrasenaClicked(object? sender, EventArgs e)
     {
         EntryContrasena.IsPassword = !EntryContrasena.IsPassword;
-        BtnToggleContrasena.Text = EntryContrasena.IsPassword ? "👁 Mostrar" : "🔒 Ocultar";
+        BtnToggleContrasena.Text = EntryContrasena.IsPassword ? "Mostrar" : "Ocultar";
     }
 
     // UPDATE: Modifica los datos del usuario y los sincroniza con el modelo

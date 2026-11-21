@@ -53,7 +53,7 @@ public partial class Inicio : ContentPage
         }
         else
         {
-            LabelSaludo.Text = "¡Bienvenido a MovilL!";
+            LabelSaludo.Text = "¡Bienvenido a Balance!";
         }
 
         ListaMovimientosRecientes.ItemsSource = Sesion.Movimientos

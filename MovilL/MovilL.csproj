@@ -28,7 +28,7 @@
 		<MauiXamlInflator>SourceGen</MauiXamlInflator>
 
 		<!-- Display name -->
-		<ApplicationTitle>MovilL</ApplicationTitle>
+		<ApplicationTitle>Balance</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.movill</ApplicationId>

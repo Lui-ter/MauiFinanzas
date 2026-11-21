@@ -31,20 +31,19 @@
 
                 <VerticalStackLayout Spacing="20">
                     <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
-                        <Border WidthRequest="50"
-                                HeightRequest="50"
-                                StrokeThickness="0"
-                                BackgroundColor="#173C32"
+                        <Border WidthRequest="56"
+                                HeightRequest="56"
+                                StrokeThickness="1"
+                                Stroke="#355D52"
+                                BackgroundColor="#0E1524"
                                 StrokeShape="RoundRectangle 16">
-                            <Label Text="$"
-                                   FontSize="27"
-                                   FontAttributes="Bold"
-                                   TextColor="#68E0A3"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"/>
+                            <Image Source="logo.jpeg"
+                                   Aspect="AspectFill"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill"/>
                         </Border>
                         <VerticalStackLayout Spacing="1" VerticalOptions="Center">
-                            <Label Text="MovilL"
+                            <Label Text="Balance"
                                    FontSize="20"
                                    FontAttributes="Bold"
                                    TextColor="White"/>

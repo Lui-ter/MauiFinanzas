@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:MovilL.views"
+             xmlns:models="clr-namespace:MovilL.Models"
              x:Class="MovilL.views.Configuracion"
-             Title="Configuración"
+             Title="Mis categorías"
              Shell.TabBarIsVisible="False"
              BackgroundColor="#0B1020">
 
@@ -14,150 +15,296 @@
                      Clicked="OnUsuarioClicked"/>
     </ContentPage.ToolbarItems>
 
-    <Grid x:Name="MainGrid" RowDefinitions="*, Auto">
+    <Grid RowDefinitions="*, Auto">
+        <ScrollView x:Name="ScrollConfiguracion" Grid.Row="0">
+            <VerticalStackLayout Padding="18,16" Spacing="16" MaximumWidthRequest="720" HorizontalOptions="Center">
 
-        <ScrollView Grid.Row="0">
-            <VerticalStackLayout Padding="24" Spacing="24" MaximumWidthRequest="720" HorizontalOptions="Center">
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                    <VerticalStackLayout Spacing="4" VerticalOptions="Center">
+                        <Label Text="Mis categorías"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="White"/>
+                        <Label Text="Organiza los tipos de ingresos y gastos que usas."
+                               FontSize="13"
+                               TextColor="#8491A7"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1"
+                            Text="+ Crear"
+                            Clicked="OnCrearCategoriaClicked"
+                            BackgroundColor="#49CE8D"
+                            TextColor="#0B2018"
+                            FontAttributes="Bold"
+                            FontSize="13"
+                            HeightRequest="44"
+                            Padding="14,0"
+                            CornerRadius="12"
+                            VerticalOptions="Center"/>
+                </Grid>
 
-                <!-- PREFERENCIAS GENERALES -->
-                <Border BackgroundColor="#141B2B"
+                <Border StrokeShape="RoundRectangle 18"
+                        BackgroundColor="#141B2B"
                         Stroke="#28334B"
                         StrokeThickness="1"
-                        StrokeShape="RoundRectangle 22"
-                        Padding="26">
-                    <VerticalStackLayout Spacing="20">
+                        Padding="16">
+                    <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                        <VerticalStackLayout Spacing="4">
+                            <Label x:Name="LabelResumenCategorias"
+                                   Text="Tus categorías"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                            <Label Text="Puedes personalizar también las categorías predeterminadas; tus cambios solo afectan a tu cuenta."
+                                   FontSize="12"
+                                   TextColor="#8491A7"
+                                   LineBreakMode="WordWrap"/>
+                        </VerticalStackLayout>
+                        <Border Grid.Column="1"
+                                BackgroundColor="#0E1524"
+                                Stroke="#303B53"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="10,0"
+                                HeightRequest="38"
+                                VerticalOptions="Center">
+                            <Picker x:Name="PickerFiltro"
+                                    SelectedIndexChanged="OnFiltroChanged"
+                                    FontSize="12"
+                                    TextColor="White"
+                                    TitleColor="#8491A7"
+                                    VerticalOptions="Center">
+                                <Picker.Items>
+                                    <x:String>Todos</x:String>
+                                    <x:String>Ingresos</x:String>
+                                    <x:String>Gastos</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </Border>
+                    </Grid>
+                </Border>
 
-                        <Label Text="PREFERENCIAS DE APLICACIÓN"
-                               FontSize="14"
+                <Border x:Name="PanelEditorCategoria"
+                        IsVisible="False"
+                        StrokeShape="RoundRectangle 18"
+                        BackgroundColor="#141B2B"
+                        Stroke="#28334B"
+                        StrokeThickness="1"
+                        Padding="16">
+                    <VerticalStackLayout Spacing="12">
+                        <Label x:Name="LabelTituloEditor"
+                               Text="Crear tipo de movimiento"
+                               FontSize="18"
                                FontAttributes="Bold"
-                               TextColor="#68E0A3"/>
+                               TextColor="White"/>
+                        <Label Text="Elige el tipo, asigna un nombre y añade una imagen para identificarlo fácilmente."
+                               FontSize="12"
+                               TextColor="#8491A7"
+                               LineBreakMode="WordWrap"/>
 
-                        <!-- Moneda Principal -->
-                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
-                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
-                                <Label Text="Moneda principal" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Moneda para el formato de balances" FontSize="13" TextColor="#8491A7"/>
-                            </VerticalStackLayout>
-
-                            <Border Grid.Column="1"
-                                    StrokeShape="RoundRectangle 10"
-                                    BackgroundColor="#192338"
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
+                            <Border StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#0E1524"
                                     Stroke="#303B53"
                                     StrokeThickness="1"
-                                    Padding="14, 0"
-                                    WidthRequest="130"
-                                    HeightRequest="46">
-                                <Picker x:Name="PickerMoneda" TextColor="White" FontSize="14" VerticalTextAlignment="Center">
+                                    Padding="12,0"
+                                    HeightRequest="48">
+                                <Picker x:Name="PickerTipoEditor"
+                                        FontSize="14"
+                                        TextColor="White"
+                                        TitleColor="#8491A7"
+                                        VerticalOptions="Center">
                                     <Picker.Items>
-                                        <x:String>COP ($)</x:String>
-                                        <x:String>USD ($)</x:String>
-                                        <x:String>EUR (€)</x:String>
-                                        <x:String>MXN ($)</x:String>
+                                        <x:String>Ingreso</x:String>
+                                        <x:String>Gasto</x:String>
                                     </Picker.Items>
                                 </Picker>
                             </Border>
-                        </Grid>
+                        </VerticalStackLayout>
 
-                        <BoxView HeightRequest="1" Color="#28334B"/>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Nombre de la categoría" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
+                            <Border StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#0E1524"
+                                    Stroke="#303B53"
+                                    StrokeThickness="1"
+                                    Padding="12,0"
+                                    HeightRequest="48">
+                                <Entry x:Name="EntryNombreCategoria"
+                                       Placeholder="Ej. Mascotas, salud, ventas"
+                                       PlaceholderColor="#71809A"
+                                       TextColor="White"
+                                       MaxLength="40"
+                                       ReturnType="Done"
+                                       VerticalOptions="Center"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                        <!-- Confirmar antes de guardar -->
-                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
-                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
-                                <Label Text="Confirmar movimientos" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Preguntar antes de registrar transacciones" FontSize="13" TextColor="#8491A7"/>
+                        <Grid ColumnDefinitions="88, *, Auto" ColumnSpacing="10">
+                            <Border WidthRequest="88"
+                                    HeightRequest="80"
+                                    StrokeShape="RoundRectangle 12"
+                                    BackgroundColor="#0E1524"
+                                    Stroke="#303B53"
+                                    StrokeThickness="1"
+                                    Padding="4">
+                                <Grid>
+                                    <Image x:Name="ImagePreviewCategoria"
+                                           Aspect="AspectFill"
+                                           IsVisible="False"/>
+                                    <Label x:Name="LabelSinImagen"
+                                           Text="Sin imagen"
+                                           FontSize="10"
+                                           TextColor="#8491A7"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Grid>
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                                <Label Text="Imagen de categoría" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
+                                <Button Text="Elegir imagen"
+                                        Clicked="OnSeleccionarImagenClicked"
+                                        BackgroundColor="#202A3D"
+                                        TextColor="#68E0A3"
+                                        FontAttributes="Bold"
+                                        FontSize="12"
+                                        HeightRequest="40"
+                                        CornerRadius="10"/>
                             </VerticalStackLayout>
-                            <Switch Grid.Column="1" x:Name="SwitchConfirmar" IsToggled="True" OnColor="#49CE8D"/>
+                            <Button x:Name="BtnQuitarImagen"
+                                    Grid.Column="2"
+                                    Text="Quitar"
+                                    Clicked="OnQuitarImagenClicked"
+                                    BackgroundColor="#202A3D"
+                                    TextColor="#FF8585"
+                                    FontSize="11"
+                                    Padding="8,0"
+                                    HeightRequest="36"
+                                    CornerRadius="9"
+                                    VerticalOptions="Center"/>
                         </Grid>
+                        <Label Text="JPG o PNG, máximo 10 MB."
+                               FontSize="11"
+                               TextColor="#8491A7"/>
 
-                        <BoxView HeightRequest="1" Color="#28334B"/>
+                        <Label x:Name="LabelMensajeCategoria"
+                               IsVisible="False"
+                               FontSize="12"
+                               LineBreakMode="WordWrap"/>
 
-                        <!-- Notificaciones -->
-                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
-                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
-                                <Label Text="Recordatorios diarios" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Recibir aviso para registrar gastos del día" FontSize="13" TextColor="#8491A7"/>
-                            </VerticalStackLayout>
-                            <Switch Grid.Column="1" x:Name="SwitchNotificaciones" IsToggled="True" OnColor="#49CE8D"/>
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="8">
+                            <Button Text="Cancelar"
+                                    Clicked="OnCancelarEditorClicked"
+                                    BackgroundColor="#202A3D"
+                                    TextColor="#A6B1C5"
+                                    FontSize="13"
+                                    HeightRequest="44"
+                                    CornerRadius="10"/>
+                            <Button x:Name="BtnGuardarCategoria"
+                                    Grid.Column="1"
+                                    Text="Guardar categoría"
+                                    Clicked="OnGuardarCategoriaClicked"
+                                    BackgroundColor="#49CE8D"
+                                    TextColor="#0B2018"
+                                    FontAttributes="Bold"
+                                    FontSize="13"
+                                    HeightRequest="44"
+                                    CornerRadius="10"/>
                         </Grid>
-
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- SEGURIDAD -->
-                <Border BackgroundColor="#141B2B"
+                <Label x:Name="LabelAccesoCategorias"
+                       IsVisible="False"
+                       Text="Inicia sesión con una cuenta para crear y personalizar tus categorías."
+                       FontSize="13"
+                       TextColor="#FFC66D"
+                       LineBreakMode="WordWrap"/>
+
+                <VerticalStackLayout x:Name="ListaCategorias" Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:Categoria">
+                            <Border StrokeShape="RoundRectangle 16"
+                                    BackgroundColor="#141B2B"
+                                    Stroke="#28334B"
+                                    StrokeThickness="1"
+                                    Padding="12">
+                                <Grid ColumnDefinitions="58, *, Auto" ColumnSpacing="12">
+                                    <Border WidthRequest="58"
+                                            HeightRequest="58"
+                                            StrokeShape="RoundRectangle 12"
+                                            BackgroundColor="#0E1524"
+                                            Stroke="#303B53"
+                                            StrokeThickness="1"
+                                            Padding="2">
+                                        <Image Source="{Binding Imagen}" Aspect="AspectFill"/>
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                                        <Label Text="{Binding Nombre}"
+                                               FontSize="15"
+                                               FontAttributes="Bold"
+                                               TextColor="White"
+                                               LineBreakMode="TailTruncation"/>
+                                        <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="7">
+                                            <Label Text="{Binding Tipo}"
+                                                   FontSize="11"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#68E0A3"/>
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding EtiquetaAlcance}"
+                                                   FontSize="11"
+                                                   TextColor="#8491A7"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="2"
+                                                         Spacing="5"
+                                                         VerticalOptions="Center">
+                                        <Button Text="Editar"
+                                                Clicked="OnEditarCategoriaClicked"
+                                                BackgroundColor="#202A3D"
+                                                TextColor="#68E0A3"
+                                                FontSize="11"
+                                                Padding="10,0"
+                                                HeightRequest="32"
+                                                CornerRadius="8"/>
+                                        <Button Text="Borrar"
+                                                Clicked="OnEliminarCategoriaClicked"
+                                                BackgroundColor="#30202A"
+                                                TextColor="#FF8585"
+                                                FontSize="11"
+                                                Padding="10,0"
+                                                HeightRequest="32"
+                                                CornerRadius="8"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <Label x:Name="LabelSinCategorias"
+                       IsVisible="False"
+                       Text="No hay categorías en este filtro. Crea una categoría personal para empezar."
+                       FontSize="13"
+                       TextColor="#8491A7"
+                       HorizontalTextAlignment="Center"
+                       Margin="8"/>
+
+                <Border StrokeShape="RoundRectangle 14"
+                        BackgroundColor="#101827"
                         Stroke="#28334B"
                         StrokeThickness="1"
-                        StrokeShape="RoundRectangle 22"
-                        Padding="26">
-                    <VerticalStackLayout Spacing="20">
-
-                        <Label Text="SEGURIDAD Y PRIVACIDAD"
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               TextColor="#68E0A3"/>
-
-                        <!-- Bloqueo biométrico/PIN -->
-                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
-                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
-                                <Label Text="Bloqueo al salir" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Solicitar clave al reanudar la app" FontSize="13" TextColor="#8491A7"/>
-                            </VerticalStackLayout>
-                            <Switch Grid.Column="1" x:Name="SwitchBloqueo" IsToggled="False" OnColor="#49CE8D"/>
-                        </Grid>
-
-                        <BoxView HeightRequest="1" Color="#28334B"/>
-
-                        <!-- Modo Oscuro -->
-                        <Grid ColumnDefinitions="*, Auto" VerticalOptions="Center">
-                            <VerticalStackLayout Spacing="3" VerticalOptions="Center">
-                                <Label Text="Tema Oscuro" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                                <Label Text="Paleta de alto contraste y descanso visual" FontSize="13" TextColor="#8491A7"/>
-                            </VerticalStackLayout>
-                            <Switch Grid.Column="1" x:Name="SwitchModoOscuro" IsToggled="True" OnColor="#49CE8D" IsEnabled="False"/>
-                        </Grid>
-
-                    </VerticalStackLayout>
+                        Padding="14">
+                    <Label Text="Al borrar una categoría, los movimientos ya guardados se conservan. Si editas o quitas una categoría predeterminada, el cambio solo aplica a tu cuenta."
+                           FontSize="12"
+                           TextColor="#8491A7"
+                           LineBreakMode="WordWrap"/>
                 </Border>
-
-                <!-- ACERCA DE -->
-                <Border BackgroundColor="#141B2B"
-                        Stroke="#28334B"
-                        StrokeThickness="1"
-                        StrokeShape="RoundRectangle 22"
-                        Padding="26">
-                    <VerticalStackLayout Spacing="12">
-                        <Label Text="ACERCA DE LA APLICACIÓN"
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               TextColor="#68E0A3"/>
-                        <Label Text="MovilL - Gestor Financiero Personal" FontSize="16" FontAttributes="Bold" TextColor="White"/>
-                        <Label Text="Versión 1.0.0" FontSize="13" TextColor="#8491A7"/>
-                        <Label Text="Plataforma desarrollada en .NET MAUI para el seguimiento y control ágil de gastos e ingresos."
-                               FontSize="13"
-                               TextColor="#A6B1C5"
-                               LineHeight="1.3"/>
-                    </VerticalStackLayout>
-                </Border>
-
-                <!-- BOTÓN GUARDAR -->
-                <Button Text="Guardar Ajustes"
-                        BackgroundColor="#49CE8D"
-                        TextColor="#0B2018"
-                        FontAttributes="Bold"
-                        FontSize="16"
-                        CornerRadius="12"
-                        HeightRequest="52"
-                        Clicked="OnGuardarAjustesClicked"/>
-
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Barra de navegación inferior -->
         <views:Navegador Grid.Row="1" PaginaActiva=""/>
-
-        <!-- Menú lateral deslizable -->
         <views:Menu x:Name="MenuUsuario" Grid.RowSpan="2"/>
-
     </Grid>
 </ContentPage>
-

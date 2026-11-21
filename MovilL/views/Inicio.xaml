@@ -28,7 +28,7 @@
                            FontAttributes="Bold"
                            TextColor="#68E0A3"/>
                     <Label x:Name="LabelSaludo"
-                           Text="¡Bienvenido a MovilL!"
+                           Text="¡Bienvenido a Balance!"
                            FontSize="29"
                            FontAttributes="Bold"
                            TextColor="White"/>

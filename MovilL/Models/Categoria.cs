@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace MovilL.Models;
 
 public class Categoria
@@ -5,9 +7,15 @@ public class Categoria
     public int Pk { get; set; }
     public int Id { get => Pk; set => Pk = value; }
     public int UsuarioId { get; set; }
+    public int? CategoriaPredeterminadaId { get; set; }
+    public bool OcultaParaUsuario { get; set; }
     public string Nombre { get; set; } = string.Empty;
     public string Imagen { get; set; } = string.Empty;
     public string Tipo { get; set; } = "Gasto"; // "Ingreso" o "Gasto"
+    [NotMapped]
+    public bool EsPersonal => UsuarioId > 0;
+    [NotMapped]
+    public string EtiquetaAlcance => EsPersonal ? "Personal" : "Predeterminada";
 
     public Categoria()
     {

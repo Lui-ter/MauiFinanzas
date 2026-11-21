@@ -20,8 +20,7 @@
         <ScrollView Grid.Row="0" Orientation="Vertical" HorizontalScrollBarVisibility="Never">
             <VerticalStackLayout Spacing="16" HorizontalOptions="Fill" Padding="16, 12">
 
-                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="12" Margin="2, 4, 2, 0">
-                    <VerticalStackLayout Spacing="4">
+                <VerticalStackLayout Spacing="4" Margin="2, 4, 2, 0">
                         <Label Text="Movimientos"
                                FontSize="22"
                                FontAttributes="Bold"
@@ -30,142 +29,7 @@
                                FontSize="13"
                                TextColor="#8491A7"
                                LineBreakMode="WordWrap"/>
-                    </VerticalStackLayout>
-                    <Button Grid.Column="1"
-                            Text="Crear tipo&#10;movimiento"
-                            SemanticProperties.Description="Crear tipo de movimiento y categoría"
-                            Clicked="OnMostrarFormularioCategoriaClicked"
-                            BackgroundColor="#202A3D"
-                            TextColor="#68E0A3"
-                            FontAttributes="Bold"
-                            FontSize="12"
-                            HeightRequest="42"
-                            Padding="12,0"
-                            CornerRadius="12"
-                            VerticalOptions="Center"/>
-                </Grid>
-
-                <Border x:Name="FormularioCategoria"
-                        IsVisible="False"
-                        StrokeShape="RoundRectangle 18"
-                        BackgroundColor="#141B2B"
-                        Stroke="#28334B"
-                        StrokeThickness="1"
-                        Padding="16">
-                    <VerticalStackLayout Spacing="12">
-                        <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
-                            <VerticalStackLayout Spacing="3">
-                                <Label Text="Crear tipo de movimiento"
-                                       FontSize="17"
-                                       FontAttributes="Bold"
-                                       TextColor="White"/>
-                                <Label Text="Define si será ingreso o gasto y personaliza su categoría."
-                                       FontSize="12"
-                                       TextColor="#8491A7"
-                                       LineBreakMode="WordWrap"/>
-                            </VerticalStackLayout>
-                            <Button Grid.Column="1"
-                                    Text="Cerrar"
-                                    Clicked="OnOcultarFormularioCategoriaClicked"
-                                    BackgroundColor="#202A3D"
-                                    TextColor="#A6B1C5"
-                                    FontSize="12"
-                                    CornerRadius="10"
-                                    Padding="10,0"
-                                    HeightRequest="36"
-                                    VerticalOptions="Start"/>
-                        </Grid>
-
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Tipo de movimiento" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
-                            <Border StrokeShape="RoundRectangle 10"
-                                    BackgroundColor="#0E1524"
-                                    Stroke="#303B53"
-                                    StrokeThickness="1"
-                                    Padding="12,0"
-                                    HeightRequest="48">
-                                <Picker x:Name="PickerTipoCategoria"
-                                        FontSize="14"
-                                        TextColor="White"
-                                        TitleColor="#8491A7"
-                                        VerticalOptions="Center">
-                                    <Picker.Items>
-                                        <x:String>Ingreso</x:String>
-                                        <x:String>Gasto</x:String>
-                                    </Picker.Items>
-                                </Picker>
-                            </Border>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Nombre de la categoría" FontAttributes="Bold" FontSize="13" TextColor="#A6B1C5"/>
-                            <Border StrokeShape="RoundRectangle 10"
-                                    BackgroundColor="#0E1524"
-                                    Stroke="#303B53"
-                                    StrokeThickness="1"
-                                    Padding="12,0"
-                                    HeightRequest="48">
-                                <Entry x:Name="EntryNuevaCategoria"
-                                       Placeholder="Ej. Mascotas, salud, ventas"
-                                       PlaceholderColor="#71809A"
-                                       TextColor="White"
-                                       MaxLength="40"
-                                       ReturnType="Done"
-                                       VerticalOptions="Center"/>
-                            </Border>
-                        </VerticalStackLayout>
-
-                        <Grid ColumnDefinitions="96, *" ColumnSpacing="12">
-                            <Border WidthRequest="96"
-                                    HeightRequest="88"
-                                    StrokeShape="RoundRectangle 12"
-                                    BackgroundColor="#0E1524"
-                                    Stroke="#303B53"
-                                    StrokeThickness="1"
-                                    Padding="4">
-                                <Grid>
-                                    <Image x:Name="ImagePreviewNuevaCategoria"
-                                           Aspect="AspectFill"
-                                           IsVisible="False"/>
-                                    <Label x:Name="LabelSinImagenCategoria"
-                                           Text="Sin imagen"
-                                           FontSize="11"
-                                           TextColor="#8491A7"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center"/>
-                                </Grid>
-                            </Border>
-                            <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
-                                <Button Text="Seleccionar imagen"
-                                        Clicked="OnSeleccionarImagenCategoriaClicked"
-                                        BackgroundColor="#202A3D"
-                                        TextColor="#68E0A3"
-                                        FontAttributes="Bold"
-                                        FontSize="13"
-                                        HeightRequest="42"
-                                        CornerRadius="10"/>
-                                <Label Text="Formatos JPG o PNG"
-                                       FontSize="11"
-                                       TextColor="#8491A7"/>
-                            </VerticalStackLayout>
-                        </Grid>
-
-                        <Label x:Name="LabelCategoriaMensaje"
-                               IsVisible="False"
-                               FontSize="12"
-                               LineBreakMode="WordWrap"/>
-
-                        <Button x:Name="BtnGuardarCategoria"
-                                Text="Guardar categoría"
-                                Clicked="OnGuardarCategoriaClicked"
-                                BackgroundColor="#68E0A3"
-                                TextColor="#0B2018"
-                                FontAttributes="Bold"
-                                FontSize="14"
-                                HeightRequest="46"
-                                CornerRadius="11"/>
-                    </VerticalStackLayout>
-                </Border>
+                </VerticalStackLayout>
 
                 <VerticalStackLayout x:Name="FormularioMovimiento" Spacing="16">
 

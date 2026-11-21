@@ -10,6 +10,8 @@ public interface IMovilDatabaseService
     Task<List<Categoria>> GetCategoriasAsync(int usuarioId);
     Task<bool> ExisteCategoriaAsync(string nombre, string tipo, int usuarioId);
     Task<Categoria> GuardarCategoriaAsync(Categoria categoria);
+    Task<Categoria> ActualizarCategoriaAsync(Categoria categoria, int usuarioId);
+    Task<bool> EliminarCategoriaAsync(int categoriaId, int usuarioId);
     Task<Usuario?> GetUsuarioPorCredencialesAsync(string nombreUsuario, string contrasena);
     Task<bool> ExisteNombreUsuarioAsync(string nombreUsuario, int idExcluir = 0);
     Task<Usuario> GuardarUsuarioAsync(Usuario usuario);
